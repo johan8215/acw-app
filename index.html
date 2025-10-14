@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allston Car Wash — ACW APP</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" sizes="192x192" href="acw-icon.png"/>
+  <meta name="theme-color" content="#063b78"/>
+  <style>
+    :root { --bg1:#072e5f; --bg2:#1a76c8; --text:#eaf3ff; --btn:#2e7cd3; --btn-hover:#2164ad; }
+    *{box-sizing:border-box} html,body{height:100%} body{
+      margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, #145aa6 0%, transparent 50%),
+                  linear-gradient(180deg, var(--bg1) 0%, #0a3f7a 40%, #0f4f98 70%, var(--bg2) 100%);
+      color:var(--text);display:flex;flex-direction:column;min-height:100vh;
+    }
+    header{display:flex;align-items:center;gap:.6rem;padding:14px 16px}
+    .logo{width:42px;height:42px;border-radius:10px;background:#0f4f98;display:grid;place-items:center;
+      box-shadow: inset 0 2px 6px rgba(255,255,255,.25), inset 0 -2px 8px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.35);
+      position:relative;overflow:hidden}
+    .spin{position:absolute;inset:-10px;border:4px solid transparent;border-top-color:#ffffffbb;border-left-color:#ffffff55;border-radius:50%;
+      animation:spin 1.4s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .brand{font-weight:800;letter-spacing:.4px;text-shadow:0 1px 0 #0007}
+    main{flex:1;display:grid;place-items:center;padding:20px}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));width:min(1050px,100%)}
+    .card{backdrop-filter:blur(12px);background:linear-gradient(145deg,rgba(255,255,255,.20),rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15)}
+    h1{margin:.2rem 0 0;font-size:20px} .muted{opacity:.85;font-size:12px}
+    label{font-size:12px;opacity:.85;display:block;margin:8px 0 6px}
+    input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);color:#fff;outline:none}
+    input::placeholder{color:#cfe6ff88} .row{display:flex;gap:12px}
+    button{width:100%;margin-top:10px;padding:12px 14px;border-radius:14px;border:0;color:#fff;font-weight:700;
+      background:linear-gradient(180deg,var(--btn) 0%,#1e64b3 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 14px rgba(0,0,0,.4);cursor:pointer}
+    button:hover{background:linear-gradient(180deg,var(--btn-hover) 0%,#1b589d 100%)} .outline{background:transparent;border:1px solid rgba(255,255,255,.25)}
+    .status{margin-top:10px;font-size:12px;min-height:18px;opacity:.9} footer{text-align:center;padding:10px;font-size:12px;opacity:.9}
+    a{color:#bfe0ff} .badge{display:inline-flex;align-items:center;gap:.35rem;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.10);font-size:12px} .pill{padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.25);display:inline-block;margin-left:auto}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><div class="spin"></div><span>ACW</span></div>
+    <div><div class="brand">Allston Car Wash</div><div class="muted" id="today"></div></div>
+    <div class="pill" id="rolePill">Loading…</div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <h1 id="title">Allston Car Wash</h1>
+          <span class="badge" id="weekBadge">–</span>
+        </div>
+        <div class="muted" id="subtitle">Schedule · Hours · Updates</div>
+        <label id="lblLang">Language / Idioma</label>
+        <select id="lang"><option value="en">English</option><option value="es">Español</option></select>
+        <label id="lblEmail">Email (Google)</label>
+        <input id="email" type="email" placeholder="you@gmail.com" />
+        <label id="lblShort">Short name (e.g., J. Giraldo)</label>
+        <input id="shortname" type="text" placeholder="J. Giraldo" />
+        <button id="btnView">View my schedule</button>
+        <div class="status" id="status1"></div>
+        <div id="result" class="center" style="margin-top:12px;"></div>
+      </section>
+      <section class="card">
+        <h1 id="mgrTitle">Panel (Manager / Supervisor)</h1>
+        <div class="muted" id="mgrHelp">Quick actions sent by WhatsApp</div>
+        <button id="sendToday">Send Today</button>
+        <button id="sendTomorrow" class="outline">Send Tomorrow</button>
+        <button id="sendUpdates" class="outline">Send Updates</button>
+        <div class="status" id="status2"></div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <a href="https://allstoncarwash.com" target="_blank" rel="noopener">allstoncarwash.com</a> · (617) 254-3200
+    <br/>Creado por <strong>Johan A. Giraldo</strong> · ACW-APP v3.1
+  </footer>
+
+<script>
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzurO0OdzbdKtgZBeK1A4ikW4YNcYgM-j-KYRJTMpFTkoYhymfxsu1GBcXZB7IpjBus/exec";
+const T={en:{sub:"Schedule · Hours · Updates",lang:"Language / Idioma",email:"Email (Google)",short:"Short name (e.g., J. Giraldo)",view:"View my schedule",
+  mgr:"Panel (Manager / Supervisor)",help:"Quick actions sent by WhatsApp",sendToday:"Send Today",sendTomorrow:"Send Tomorrow",sendUpdates:"Send Updates",loading:"Loading…",ok:"Done ✔",err:"Error"}, 
+  es:{sub:"Horario · Horas · Actualizaciones",lang:"Idioma / Language",email:"Email (Google)",short:"Nombre corto (ej., J. Giraldo)",view:"Ver mi horario",
+  mgr:"Panel (Manager / Supervisor)",help:"Acciones rápidas enviadas por WhatsApp",sendToday:"Enviar HOY",sendTomorrow:"Enviar MAÑANA",sendUpdates:"Enviar ACTUALIZACIONES",loading:"Cargando…",ok:"Listo ✔",err:"Error"}};
+
+function fmtToday(){const d=new Date();return d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});}
+function setLang(l){const t=T[l]||T.en; subtitle.textContent=t.sub; lblLang.textContent=t.lang; lblEmail.textContent=t.email; lblShort.textContent=t.short;
+  btnView.textContent=t.view; mgrTitle.textContent=t.mgr; mgrHelp.textContent=t.help; sendToday.textContent=t.sendToday; sendTomorrow.textContent=t.sendTomorrow; sendUpdates.textContent=t.sendUpdates;}
+function loadLocal(){email.value=localStorage.getItem('acw_email')||''; shortname.value=localStorage.getItem('acw_short')||''; 
+  const l=(localStorage.getItem('acw_lang')||navigator.language||'en').slice(0,2); lang.value=(l==='es'?'es':'en'); setLang(lang.value);}
+function saveLocal(){localStorage.setItem('acw_email',email.value.trim()); localStorage.setItem('acw_short',shortname.value.trim()); localStorage.setItem('acw_lang',lang.value);}
+function setWeekBadge(){const now=new Date();const day=(now.getDay()+6)%7;const mon=new Date(now);mon.setDate(now.getDate()-day);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);function mdy(d){return (d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getDate().toString().padStart(2,'0')+'/'+(d.getFullYear()%100);}
+  weekBadge.textContent=mdy(mon)+' – '+mdy(sun);}
+async function getRolePill(){const mail=(email.value||'').toLowerCase();let role='employee';
+  if(['mcdelaney87@gmail.com','mark.delaney89@gmail.com'].includes(mail)) role='owner';
+  if(['johan8215@gmail.com','tito12079@gmail.com','acw.jag@gmail.com'].includes(mail)) role='manager';
+  if(mail.includes('wendy')) role='supervisor';
+  rolePill.textContent=role[0].toUpperCase()+role.slice(1);}
+async function viewSchedule(){
+  saveLocal(); status1.textContent=T[lang.value].loading;
+  try{const u=new URL(ENDPOINT);u.searchParams.set('action','getSchedule');u.searchParams.set('email',email.value.trim());u.searchParams.set('short',shortname.value.trim());
+    const r=await fetch(u); const data=await r.json(); renderSchedule(data); status1.textContent=T[lang.value].ok;}
+  catch(e){status1.textContent=T[lang.value].err; console.error(e);}
+}
+function renderSchedule(d){const l=lang.value; const w=(l==='es')?['lun.','mar.','mié.','jue.','vie.','sáb.','dom.']:['mon.','tue.','wed.','thu.','fri.','sat.','sun.'];
+  if(!d||!Array.isArray(d.days)){result.innerHTML='<div class="muted">No data</div>'; return;}
+  let html='<div style="text-align:left;display:grid;gap:8px">'; html+='<div style="font-weight:700;">'+(l==='es'?'Horario de esta semana':'This Week\'s Schedule')+'</div>';
+  d.days.forEach((x,i)=>{html+=`<div style="display:flex;justify-content:space-between;background:rgba(255,255,255,.08);padding:10px 12px;border-radius:10px;">
+    <span style="width:80px;text-transform:capitalize">${w[i]}</span><span style="flex:1;text-align:center">${x.shift||'-'}</span>
+    <span style="width:60px;text-align:right">${x.hours? '('+x.hours+')':''}</span></div>`;});
+  html+=`<div style="display:flex;justify-content:space-between;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);margin-top:6px;"><strong>Total</strong><strong>${d.total||0} h</strong></div>`;
+  html+='</div>'; result.innerHTML=html;}
+async function doAction(k){saveLocal(); status2.textContent=T[lang.value].loading; try{const u=new URL(ENDPOINT);u.searchParams.set('action',k); await fetch(u); status2.textContent=T[lang.value].ok;}catch(e){status2.textContent=T[lang.value].err;}}
+
+const todayEl=today; todayEl.textContent=fmtToday(); setWeekBadge(); loadLocal(); getRolePill();
+btnView.addEventListener('click',viewSchedule); sendToday.addEventListener('click',()=>doAction('sendToday')); sendTomorrow.addEventListener('click',()=>doAction('sendTomorrow')); sendUpdates.addEventListener('click',()=>doAction('sendUpdates'));
+lang.addEventListener('change',()=>{setLang(lang.value); saveLocal();}); if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body></html>

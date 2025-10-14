@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allston Car Wash App</title>
+  <meta name="theme-color" content="#0A7BFF"/>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="acw-icon.png" />
+  <link rel="apple-touch-icon" href="acw-icon.png"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="hero">
+      <div class="logo">ACW</div>
+      <h1>Allston Car Wash</h1>
+      <p class="sub">Schedule • Hours • Updates</p>
+    </header>
+
+    <section class="card">
+      <div class="row">
+        <label for="lang">Language / Idioma</label>
+        <select id="lang">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label id="labelEmail" for="email">Correo (Google)</label>
+        <input id="email" type="email" placeholder="tuemail@ejemplo.com"/>
+      </div>
+
+      <div class="row">
+        <label id="labelCode" for="code">Nombre corto (ej. J. Giraldo)</label>
+        <input id="code" type="text" placeholder="J. Giraldo"/>
+      </div>
+
+      <div class="row hint">
+        <small id="whoSees">Verás tus turnos y horas. Managers pueden enviar mensajes.</small>
+      </div>
+
+      <div class="buttons">
+        <button id="btnView" class="primary">Ver mi horario</button>
+        <button id="btnToday" class="ghost">Enviar Hoy</button>
+        <button id="btnTomorrow" class="ghost">Enviar Mañana</button>
+        <button id="btnUpdates" class="ghost">Enviar Updates</button>
+      </div>
+    </section>
+
+    <section id="result" class="card hidden">
+      <h2 id="resTitle">Mi Semana</h2>
+      <div id="weekLabel" class="pill">Semana</div>
+      <ul id="list" class="days"></ul>
+      <div id="total" class="total"></div>
+    </section>
+
+    <footer>
+      <a href="https://allstoncarwash.com" target="_blank" rel="noreferrer">allstoncarwash.com</a> · (617) 254-3200
+      <div class="tiny">v2.0 · PWA ready</div>
+    </footer>
+  </div>
+
+  <script>
+    window.ACW_CONFIG = {
+      SHEET_ID: "1HjPzkLLts7NlCou_94QSqwXezizc8MGQfob24RTdE9A",
+      WEBAPP_URL: "https://script.google.com/macros/s/AKfycbyi8Yna3SRi2ag0qMoMgFT_XZB8x2l25-7Wle8dhEp3MbTQCHpOh17gBBDDSRhUP9Xx/exec",
+      MANAGERS: ["johan8215@gmail.com", "tito12079@gmail.com"]
+    };
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

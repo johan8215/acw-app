@@ -1,0 +1,20 @@
+{
+  "name": "Allston Car Wash",
+  "short_name": "ACW",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0A7BFF",
+  "theme_color": "#0A7BFF",
+  "icons": [
+    {
+      "src": "acw-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "acw-notify.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

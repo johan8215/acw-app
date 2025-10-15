@@ -1,0 +1,33 @@
+:root{
+  --bg1:#0b254a;
+  --bg2:#5ecbff;
+  --text:#ffffff;
+  --accent:#2f8fff;
+}
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;}
+body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--text);display:flex;align-items:center;justify-content:center;}
+.wrap{width:100%;max-width:980px;padding:20px}
+.hero{text-align:center;margin-bottom:8px}
+.logo{margin:0 auto 8px auto;width:84px;height:84px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(145deg,#143b77,#66ccff);color:white;font-weight:800;font-size:34px;text-shadow:0 2px 12px #0006;box-shadow:inset 0 0 10px #fff6,0 10px 24px #0003}
+h1{margin:6px 0 0 0}
+.tag{opacity:.85;margin-top:4px}
+.card{margin:16px auto;max-width:520px;padding:20px;background:linear-gradient(180deg,#ffffff33,#ffffff12);border:1px solid #ffffff33;border-radius:18px;box-shadow:0 20px 50px #0003,inset 0 0 15px #ffffff22;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:none}
+.card.visible{display:block}
+.field{margin:12px 0}
+label{display:block;margin:0 0 6px 6px;opacity:.9}
+input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #ffffff66;background:#ffffff;color:#111;font-size:16px}
+.btn{background:#e6f2ff;border:0;color:#0d2b57;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600}
+.btn.primary{background:var(--accent);color:white}
+.lang-toggle{margin-top:16px;text-align:center}
+.chip{border:1px solid #ffffff80;background:#ffffff22;color:#fff;margin:0 6px 0 0;padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip.active{background:#ffffff55}
+.list{list-style:none;padding:0;margin:12px 0}
+.list li{background:#ffffff;color:#0d2b57;border-radius:12px;padding:12px;margin:8px 0;display:flex;gap:10px;justify-content:space-between;align-items:center}
+.total{margin-top:8px;font-weight:700}
+.cta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.footer{opacity:.95;text-align:center;margin-top:14px}
+.footer a{color:#fff;text-decoration:underline}
+.footer .phone{color:#fff}
+.error{color:#ffdfdf;background:#8b000033;border:1px solid #ff6b6b;padding:10px;border-radius:10px;margin-top:10px;display:none}
+.error.show{display:block}
+@media (max-width:520px){.logo{width:70px;height:70px;font-size:28px;border-radius:16px}.card{padding:16px}}

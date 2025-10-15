@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allston Car Wash</title>
+  <link rel="icon" href="assets/icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="google-signin-client_id" content="349643299522-g40ihht05th3cthd0d57pbpe36tkiuoj.apps.googleusercontent.com">
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="logo">ACW</div>
+      <h1>Allston Car Wash</h1>
+      <p class="tag">Reliable schedules. Easy access.</p>
+    </header>
+
+    <main id="view-auth" class="card glass visible">
+      <h2 id="welcome-title">Welcome</h2>
+      <p class="muted">Sign in with Google and enter your temporary password.</p>
+      <div id="g_id_onload"
+          data-client_id="349643299522-g40ihht05th3cthd0d57pbpe36tkiuoj.apps.googleusercontent.com"
+          data-context="signin"
+          data-callback="onGoogleSignIn"
+          data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signin_with" data-shape="rect" data-logo_alignment="left"></div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="0000" autocomplete="current-password" />
+      </div>
+      <button id="btn-login" class="btn primary">Login</button>
+
+      <div class="lang-toggle">
+        <button data-lang="es" class="chip active">Español</button>
+        <button data-lang="en" class="chip">English</button>
+      </div>
+
+      <div id="auth-error" class="error"></div>
+    </main>
+
+    <main id="view-employee" class="card glass">
+      <h2 id="hello"></h2>
+      <div id="week-range" class="muted"></div>
+      <ul id="schedule-list" class="list"></ul>
+      <div id="total-hours" class="total"></div>
+
+      <div class="cta-row">
+        <button class="btn" id="btn-change-pass">Change Password</button>
+        <button class="btn" id="btn-logout">Logout</button>
+      </div>
+    </main>
+
+    <main id="view-change" class="card glass">
+      <h2>Change Password</h2>
+      <div class="field"><label>Current</label><input id="cur-pass" type="password" /></div>
+      <div class="field"><label>New</label><input id="new-pass" type="password" /></div>
+      <div class="field"><label>Confirm</label><input id="new-pass-2" type="password" /></div>
+      <div id="change-msg" class="muted"></div>
+      <div class="cta-row">
+        <button class="btn primary" id="btn-save-pass">Save</button>
+        <button class="btn" id="btn-cancel-change">Cancel</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div>🌐 <a href="https://allstoncarwash.com" target="_blank">allstoncarwash.com</a> • ☎️ <span class="phone">(617) 254-3200</span></div>
+      <div>Allston Car Wash © 2025 • Built by <strong>Johan A. Giraldo</strong></div>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</body>
+</html>

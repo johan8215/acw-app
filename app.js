@@ -1,0 +1,18 @@
+(function(){
+  const cfg=window.ACW_CONFIG; const $=s=>document.querySelector(s);
+  let lang=(localStorage.getItem('acw_lang')||cfg.DEFAULT_LANG);
+  function t(k){const en={welcome:'Welcome Johan 👋',signline:'Sign in with Google to see your schedule.',find:'Find',shortph:'Type your short name (e.g., J. Giraldo / J. Gomez)',emphello:'Hello',week:'Your schedule for this week',refresh:'Refresh',signout:'Sign out',role_employee:'Employee',notfound:'Employee not found. Check your short name.'};
+  const es={welcome:'Bienvenido Johan 👋',signline:'Inicia sesión con Google para ver tu horario.',find:'Buscar',shortph:'Escribe tu nombre corto (ej.: J. Giraldo / J. Gomez)',emphello:'Hola',week:'Tu horario de esta semana',refresh:'Actualizar',signout:'Salir',role_employee:'Empleado',notfound:'Empleado no encontrado. Verifica tu nombre corto.'}; return (lang==='es'?es:en)[k];}
+  function setLang(L){lang=L; localStorage.setItem('acw_lang',lang); $('#loginCard h1').textContent=t('welcome'); $('#welcomeLine').textContent=t('signline'); $('#btnFind').textContent=t('find'); $('#shortName').placeholder=t('shortph'); $('#btnLogout').textContent=t('signout'); $('#btnRefresh').textContent=t('refresh'); $('#periodText').textContent=t('week');}
+  setLang(lang);
+  $('#toggleEs').addEventListener('click',e=>{e.preventDefault(); setLang(lang==='es'?'en':'es');});
+  window.onGoogleCredential=(res)=>{try{const p=JSON.parse(atob(res.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))); localStorage.setItem('acw_user_email',p.email||''); localStorage.setItem('acw_user_name',p.name||'');}catch(e){}}
+  function showEmp(){ $('#loginCard').classList.add('hidden'); $('#empCard').classList.remove('hidden'); }
+  function showLogin(){ $('#empCard').classList.add('hidden'); $('#loginCard').classList.remove('hidden'); }
+  async function fetchSchedule(short){ const url=cfg.GAS_BASE+'?action=getSchedule&short='+encodeURIComponent(short||''); const r=await fetch(url); if(!r.ok) throw new Error('Network'); return r.json(); }
+  function renderDays(model){ const grid=$('#daysGrid'); grid.innerHTML=''; const names=(lang==='es'?{Mon:'Lunes',Tue:'Martes',Wed:'Miércoles',Thu:'Jueves',Fri:'Viernes',Sat:'Sábado',Sun:'Domingo'}:{Mon:'Mon',Tue:'Tue',Wed:'Wed',Thu:'Thu',Fri:'Fri',Sat:'Sat',Sun:'Sun'}); (model.days||[]).forEach(d=>{const row=document.createElement('div'); row.className='day'; const hrs=(d.hours&&d.shift&&!/off/i.test(d.shift))?`(${d.hours})`:''; row.innerHTML=`<span class="label">${names[d.name]||d.name}</span><span class="shift">${(d.shift||'—')}</span><span class="hrs">${hrs}</span>`; grid.appendChild(row);}); }
+  $('#btnFind').addEventListener('click', async ()=>{ const short=($('#shortName').value||'').trim(); if(!short){$('#shortName').focus();return;} try{ const data=await fetchSchedule(short); if(data && !data.error){ $('#empTitle').textContent=`${t('emphello')} ${data.name.split(' ')[0]} 👋`; $('#roleBadge').textContent=t('role_employee'); renderDays(data); $('#periodText').textContent=t('week')+` · Total: ${data.total||0}h`; showEmp(); } else { alert(t('notfound')); } }catch(e){ alert('Network error'); } });
+  $('#btnRefresh').addEventListener('click',()=>$('#btnFind').click());
+  $('#btnLogout').addEventListener('click',()=>{ localStorage.removeItem('acw_user_email'); localStorage.removeItem('acw_user_name'); showLogin(); });
+  if('serviceWorker' in navigator){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); });}
+})();

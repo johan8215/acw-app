@@ -1,4 +1,5 @@
+// Allston Car Wash – App Configuration (v3.7.1)
 window.ACW_CONFIG = {
-  BACKEND_URL: "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLgEoeKCA3s4HgmOk5NsmTXuJdhfE4YO2A74BMV3VgRe-3C-F4Y-ax9BYDgGQVQWlsdRxhg2klQwxnEhl0y7zRfHI0210c8-8PMpWKZI5zUjkob0GCGyf5i2vV52b9BKK2TQop7XoiFnUPt4ybsyPrn5-G5Gaq36QZAo6CTnomxMR30c4HySkbuRG8iZ1ax2-74NoAJ1EZBoF1ax3ImmHMhaplLsx8mLVGmLOdaw6d9agePC9xTb4qMfIgdMAAhQBEMKAu2O74x9xy4dlsbktyATpvpCYg&lib=MCx5Vk-AHsQoDHTq6dWlp7VasQu9GX-ad",
+  BACKEND_URL: "https://script.google.com/macros/s/AKfycbyOhI4-ajJlXSQ-eIdWV6E7TPSpI6HJGNxovSSQPWfoCoII_6sfQm8BccXquhcwStgz/exec",
   GOOGLE_CLIENT_ID: "349643299522-g40ihht05th3cthd0d57pbpe36tkiuoj.apps.googleusercontent.com"
 };

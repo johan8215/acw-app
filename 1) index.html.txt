@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Allston Car Wash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="bg-orbs"></div>
+
+  <!-- HEADER / TOPBAR (siempre visible tras login) -->
+  <header id="topbar" class="hidden">
+    <div class="top-left">
+      <div class="logo-acw small spin" aria-label="ACW logo" title="Allston Car Wash">ACW</div>
+      <div class="app-title">Allston Car Wash</div>
+    </div>
+    <div class="top-right">
+      <span id="active-week" class="pill"></span>
+      <span class="divider">•</span>
+      <a class="phone" href="tel:+16172543200">(617) 254-3200</a>
+      <span class="divider">•</span>
+      <select id="lang-select" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- LOGIN CARD -->
+  <main id="login-view">
+    <div class="card glass">
+      <div class="logo-wrap">
+        <div class="logo-acw big slide-in" aria-label="ACW logo">ACW</div>
+      </div>
+
+      <h1 id="title-login">Sign in</h1>
+      <p id="subtitle-welcome" class="subtle"></p>
+
+      <form id="login-form" autocomplete="on">
+        <label>
+          <span id="label-email">Email</span>
+          <input id="email" type="email" inputmode="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span id="label-password">Password</span>
+          <input id="password" type="password" inputmode="numeric" autocomplete="current-password" required />
+        </label>
+        <button id="btn-login" type="submit">Sign in</button>
+      </form>
+
+      <div id="login-hint" class="hint">
+        <span id="hint-text">Need help? Ask your manager to reset your password.</span>
+      </div>
+
+      <div class="footer-line">
+        <span id="footer-powered">Powered by JAG15 | Allston Car Wash © 2025</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="hidden">
+    <div class="dash-card glass">
+      <div class="dash-header">
+        <div>
+          <h2 id="hello-name">Welcome</h2>
+          <div class="meta">
+            <span id="role-badge" class="badge">employee</span>
+            <span class="dot">•</span>
+            <span id="live-clock"></span>
+          </div>
+        </div>
+        <div class="dash-actions">
+          <button id="btn-logout" class="secondary">Logout</button>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-pill">
+          <span id="week-label">Active week:</span>
+          <strong id="week-value">—</strong>
+        </div>
+        <div class="summary-pill">
+          <span id="total-label">Total hours:</span>
+          <strong id="total-hours">0</strong>
+        </div>
+      </div>
+
+      <div id="motivation" class="motivation"></div>
+
+      <div class="grid">
+        <div class="day" id="day-mon"></div>
+        <div class="day" id="day-tue"></div>
+        <div class="day" id="day-wed"></div>
+        <div class="day" id="day-thu"></div>
+        <div class="day" id="day-fri"></div>
+        <div class="day" id="day-sat"></div>
+        <div class="day" id="day-sun"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

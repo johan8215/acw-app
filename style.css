@@ -1,0 +1,38 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", sans-serif;
+  background: color-mix(in srgb, white 90%, black 10%);
+  color: #111;
+  text-align: center;
+  padding: 40px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 8px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #007AFF;
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #000;
+    color: #fff;
+  }
+  input, button {
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+  }
+  button {
+    background: #0A84FF;
+  }
+}

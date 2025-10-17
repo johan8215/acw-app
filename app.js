@@ -33,7 +33,9 @@ async function loginUser() {
 
 async function getSchedule(email) {
   try {
-    const url = `${CONFIG.BASE_URL}?action=getScheduleByEmail&email=${encodeURIComponent(email)}`;
+    // 🧠 Usa el endpoint correcto y pasa el nombre corto
+    const shortName = email.split("@")[0]; 
+    const url = `${CONFIG.BASE_URL}?action=getSchedule&short=${encodeURIComponent(shortName)}`;
     const res = await fetch(url);
     const data = await res.json();
     console.log("📦 Data recibida:", data);
@@ -48,7 +50,6 @@ async function getSchedule(email) {
     const week = data.week || "N/A";
     const days = data.days || [];
 
-    // 💎 Construir HTML bonito
     let html = `
       <div class="week-header">
         <h3>📅 Week of ${week}</h3>
@@ -63,7 +64,7 @@ async function getSchedule(email) {
 
     for (const d of days) {
       const shift = d.shift?.trim() || "—";
-      const hours = d.hours ? d.hours : "";
+      const hours = d.hours || "";
       let rowStyle = "";
 
       if (/off/i.test(shift)) rowStyle = "style='color:#888;'";

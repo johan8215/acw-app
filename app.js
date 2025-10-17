@@ -36,16 +36,17 @@ async function getSchedule(email) {
     const url = `${CONFIG.BASE_URL}?action=getScheduleByEmail&email=${encodeURIComponent(email)}`;
     const res = await fetch(url);
     const data = await res.json();
-
     console.log("📦 Data recibida:", data);
 
     if (!data.ok) {
-      document.getElementById("schedule").innerHTML = `<p style="color:red;">No schedule found for this account.</p>`;
+      document.getElementById("schedule").innerHTML =
+        `<p style="color:red;">No schedule found for this account.</p>`;
       return;
     }
 
     const name = data.name || "Employee";
     const week = data.week || "N/A";
+    const days = data.days || [];
 
     let html = `
       <div class="week-header">
@@ -53,32 +54,39 @@ async function getSchedule(email) {
         <p><b>${name}</b></p>
       </div>
       <table class="schedule-table">
-        <tr><th>Day</th><th>Shift</th><th>Hours</th></tr>
+        <thead>
+          <tr><th>Day</th><th>Shift</th><th>Hours</th></tr>
+        </thead>
+        <tbody>
     `;
 
-    data.days.forEach(d => {
-      let shift = d.shift || "—";
-      let hours = d.hours || "";
-      let color = "";
+    // 🔹 Genera filas correctamente
+    for (const d of days) {
+      const shift = d.shift && d.shift.trim() ? d.shift : "—";
+      const hours = d.hours ? d.hours : "";
+      let style = "";
 
-      if (/off/i.test(shift)) color = "style='color:gray; opacity:0.7;'";
-      else if (!shift.trim()) color = "style='color:#bbb;'";
-      else color = "style='color:#222;'";
+      if (/off/i.test(shift)) style = "style='color:#888;'";
+      else if (shift === "—") style = "style='color:#ccc;'";
+      else style = "style='color:#222;'";
 
-      html += `<tr ${color}>
+      html += `<tr ${style}>
         <td>${d.name}</td>
         <td>${shift}</td>
         <td>${hours}</td>
       </tr>`;
-    });
+    }
 
-    html += `</table>
+    html += `
+        </tbody>
+      </table>
       <p class="total">🕓 Total Hours: <b>${data.total}</b></p>
     `;
 
     document.getElementById("schedule").innerHTML = html;
   } catch (err) {
     console.error("❌ Error loading schedule:", err);
-    document.getElementById("schedule").innerHTML = `<p style="color:red;">Error connecting to server.</p>`;
+    document.getElementById("schedule").innerHTML =
+      `<p style="color:red;">Error connecting to server.</p>`;
   }
 }

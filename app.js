@@ -48,6 +48,7 @@ async function getSchedule(email) {
     const week = data.week || "N/A";
     const days = data.days || [];
 
+    // 💎 Construir HTML bonito
     let html = `
       <div class="week-header">
         <h3>📅 Week of ${week}</h3>
@@ -60,17 +61,16 @@ async function getSchedule(email) {
         <tbody>
     `;
 
-    // 🔹 Genera filas correctamente
     for (const d of days) {
-      const shift = d.shift && d.shift.trim() ? d.shift : "—";
+      const shift = d.shift?.trim() || "—";
       const hours = d.hours ? d.hours : "";
-      let style = "";
+      let rowStyle = "";
 
-      if (/off/i.test(shift)) style = "style='color:#888;'";
-      else if (shift === "—") style = "style='color:#ccc;'";
-      else style = "style='color:#222;'";
+      if (/off/i.test(shift)) rowStyle = "style='color:#888;'";
+      else if (shift === "—") rowStyle = "style='color:#bbb;'";
+      else rowStyle = "style='color:#111; font-weight:500;'";
 
-      html += `<tr ${style}>
+      html += `<tr ${rowStyle}>
         <td>${d.name}</td>
         <td>${shift}</td>
         <td>${hours}</td>
@@ -84,6 +84,7 @@ async function getSchedule(email) {
     `;
 
     document.getElementById("schedule").innerHTML = html;
+
   } catch (err) {
     console.error("❌ Error loading schedule:", err);
     document.getElementById("schedule").innerHTML =

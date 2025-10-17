@@ -37,15 +37,14 @@ async function getSchedule(email) {
     const res = await fetch(url);
     const data = await res.json();
 
-    console.log("🔹 Response:", data);
+    console.log("📦 Data recibida:", data);
 
     if (!data.ok) {
       document.getElementById("schedule").innerHTML = `<p style="color:red;">No schedule found for this account.</p>`;
       return;
     }
 
-    // ✅ Ajuste: el backend usa "employee", no "name"
-    const name = data.employee || "Unknown";
+    const name = data.name || "Employee";
     const week = data.week || "N/A";
 
     let html = `
@@ -58,9 +57,15 @@ async function getSchedule(email) {
     `;
 
     data.days.forEach(d => {
-      const shift = d.shift || "—";
-      const hours = d.hours || "";
-      html += `<tr>
+      let shift = d.shift || "—";
+      let hours = d.hours || "";
+      let color = "";
+
+      if (/off/i.test(shift)) color = "style='color:gray; opacity:0.7;'";
+      else if (!shift.trim()) color = "style='color:#bbb;'";
+      else color = "style='color:#222;'";
+
+      html += `<tr ${color}>
         <td>${d.name}</td>
         <td>${shift}</td>
         <td>${hours}</td>

@@ -4,7 +4,7 @@
    =========================================================== */
 
 const CONFIG = {
-  BASE_URL: "https://script.google.com/macros/s/AKfycbzEj2f739VD2nvYMfaJ-ENMIA1uA-gcGlJhlUWx9DPqldCPpPPjP-omeE4THVtB2oS6/exec",
+  BASE_URL: "https://script.google.com/macros/s/AKfycbxFXgqAsWUzwo4lggP7qA_wX9RrgE1-rTt9wVGPnM_u0WKX_b7Vyo81-w9xiHIHjtqW/exec",
   APP_NAME: "Allston Car Wash",
   VERSION: "3.8.Connected.Lite",
 };

@@ -1,0 +1,58 @@
+:root {
+  color-scheme: light dark;
+  --bg-light: #f5f7fa;
+  --bg-dark: #0d1117;
+  --text-light: #222;
+  --text-dark: #e0e0e0;
+  --accent: #007aff;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+}
+
+input, button {
+  width: 280px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#status {
+  font-size: 14px;
+  color: var(--accent);
+  margin-top: 10px;
+}

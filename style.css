@@ -156,3 +156,9 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+@media (min-width: 768px) {
+  .container {
+    width: 440px;
+    padding: 50px 55px;
+  }
+}

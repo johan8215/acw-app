@@ -10,29 +10,41 @@
 </head>
 <body>
   <div class="container">
-    <h1> ALLSTON CAR WASH</h1>
+
+    <!-- 🧼 Logo + título -->
+    <h1>ALLSTON CAR WASH</h1>
+
+    <!-- 🔐 LOGIN -->
     <div id="login">
       <input type="email" id="email" placeholder="Email">
       <input type="password" id="password" placeholder="Password">
       <button onclick="loginUser()">Sign In</button>
     </div>
-    <button onclick="document.getElementById('settingsPanel').style.display='block';">
-  Open Settings
-</button>
-<div id="settingsPanel" class="settings-container" style="display:none;">
-  <h3>⚙️ Settings</h3>
-  <label for="newPassword">New Password:</label>
-  <input type="password" id="newPassword" placeholder="Enter new password">
-  <label for="confirmPassword">Confirm Password:</label>
-  <input type="password" id="confirmPassword" placeholder="Confirm password">
-  <button onclick="changeUserPassword()">Change Password</button>
-  <p id="settingsMsg"></p>
-</div>
+
+    <!-- 👋 WELCOME + SETTINGS -->
     <div id="welcome" style="display:none;">
       <h2>Welcome, <span id="userName"></span></h2>
       <p>Role: <span id="userRole"></span></p>
+      <p id="activeWeek"></p>
+
+      <!-- ⚙️ BOTÓN PARA ABRIR CONFIGURACIÓN -->
+      <button class="settings-btn" onclick="toggleSettings()">⚙️ Settings</button>
+
+      <!-- 🧩 PANEL DE SETTINGS -->
+      <div id="settingsPanel" class="settings-container" style="display:none;">
+        <h3>Change Password</h3>
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" placeholder="Enter new password">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password">
+        <button onclick="changeUserPassword()">Update Password</button>
+        <p id="settingsMsg"></p>
+      </div>
+
+      <!-- 🕓 HORARIO -->
       <div id="schedule"></div>
     </div>
+
   </div>
 </body>
 </html>

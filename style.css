@@ -1,45 +1,53 @@
 /* ===========================================================
-   🕓 Schedule View – Blue Centered Style
+   🧼 ACW Connected Blue v3.8 Glass Bright
    =========================================================== */
 
 #schedule {
   text-align: center;
-  color: #eaf1ff;
+  color: #f7faff;
   margin-top: 25px;
+  padding: 15px;
 }
 
-/* Encabezado de semana */
+/* Encabezado */
 #schedule h3, #schedule p {
-  color: #bcd3ff;
-  font-size: 17px;
+  color: #cfe3ff;
+  font-size: 18px;
+  font-weight: 500;
   margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(0, 120, 255, 0.5);
 }
 
 /* Tabla */
 .schedule-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 15px auto;
-  font-size: 16px;
-  color: #f5f8ff;
+  margin: 0 auto;
+  font-size: 17px;
+  color: #f7faff;
 }
 
 .schedule-table th {
-  color: #9ec4ff;
+  color: #a9c9ff;
   font-weight: 600;
-  padding: 10px;
   border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding: 10px;
+  letter-spacing: 0.5px;
 }
 
 .schedule-table td {
   padding: 10px;
+  color: #ffffff;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+/* Filas pares con leve fondo brillante */
 .schedule-table tr:nth-child(even) td {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
 }
 
+/* Día OFF */
 .schedule-table td:first-child {
   color: #bcd3ff;
   font-weight: 500;
@@ -48,12 +56,14 @@
 /* Total Hours */
 .total {
   margin-top: 15px;
-  color: #eaf1ff;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 120, 255, 0.6);
 }
 
-/* Mejora visual */
-h1, h2, h3, p, th, td {
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+/* Mejor contraste general dentro del contenedor */
+.container {
+  color: #f8faff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }

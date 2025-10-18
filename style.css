@@ -1,59 +1,153 @@
 /* ===========================================================
-   🌌 ACW Blue Orb Background – Fixed Permanent Version
+   💎 ACW Style – Blue Glass Panel v4.0
+   Author: Johan A. Giraldo | Allston Car Wash
    =========================================================== */
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', 'SF Pro Display', sans-serif;
-  color: #eaf1ff !important;
-  background: radial-gradient(circle at 20% 20%, #0d1a42 0%, #000a1c 100%) fixed !important;
-  overflow: hidden;
-  position: relative;
-}
-
-/* 🔵 Orbes azules flotantes */
-body::before,
-body::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-body::before {
-  width: 600px;
-  height: 600px;
-  top: -100px;
-  left: -150px;
-  background: radial-gradient(circle, rgba(0,122,255,0.35) 0%, transparent 70%);
-  animation: orbFloat1 12s ease-in-out infinite alternate;
-}
-
-body::after {
-  width: 520px;
-  height: 520px;
-  bottom: -140px;
-  right: -120px;
-  background: radial-gradient(circle, rgba(0,180,255,0.25) 0%, transparent 80%);
-  animation: orbFloat2 14s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes orbFloat1 {
-  from { transform: translateY(0px) scale(1); }
-  to { transform: translateY(-30px) scale(1.05); }
-}
-
-@keyframes orbFloat2 {
-  from { transform: translateY(0px) scale(1); }
-  to { transform: translateY(25px) scale(1.08); }
-}
-
-/* Asegura que todos los elementos estén sobre el fondo */
-.container, #schedule, footer {
+/* Cuadro central translúcido */
+.container {
+  background: rgba(20, 40, 90, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5),
+              inset 0 0 20px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  padding: 50px 60px;
+  width: 420px;
+  max-width: 90%;
+  text-align: center;
+  color: #f5f8ff;
+  margin: auto;
   position: relative;
   z-index: 10;
-  color: #f5f8ff !important;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo */
+#logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #a8cfff;
+  text-shadow: 0 0 10px rgba(0,140,255,0.4);
+  transform: rotate(-12deg);
+}
+
+/* Título y texto */
+h1 {
+  font-size: 23px;
+  color: #cfe4ff;
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px rgba(0, 100, 255, 0.6);
+}
+
+#activeWeek {
+  font-size: 15px;
+  color: #a8cfff;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 15px;
+  outline: none;
+  transition: 0.25s;
+}
+
+input:focus {
+  border-color: #007aff;
+  background: rgba(255,255,255,0.18);
+}
+
+/* Botón Sign In */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #007aff, #0050d4);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 15px rgba(0,120,255,0.4);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #1a8bff, #0060f0);
+  transform: scale(1.03);
+}
+
+/* Tabla de horario */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.schedule-table th {
+  color: #a8cfff;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding: 8px;
+  font-weight: 600;
+}
+
+.schedule-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: #ffffff;
+}
+
+.schedule-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+}
+
+/* Total Hours */
+.total {
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(0,150,255,0.5);
+}
+
+/* Footer */
+footer {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #a8cfff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    width: 92%;
+    padding: 35px 25px;
+  }
+  h1 { font-size: 20px; }
+  button { font-size: 15px; }
 }

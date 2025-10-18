@@ -198,3 +198,27 @@ footer {
   font-weight: 600;
   text-shadow: 0 0 8px rgba(0,180,255,0.6);
 }
+/* 🧭 Centrar completamente el login */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+#login {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#login input,
+#login button {
+  width: 100%;
+}

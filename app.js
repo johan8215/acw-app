@@ -86,3 +86,92 @@ async function getSchedule(email) {
       `<p style="color:red;">Error connecting to server.</p>`;
   }
 }
+// =======================================================
+// ⚙️ SETTINGS - CAMBIO DE PASSWORD
+// =======================================================
+function openSettings() {
+  const email = localStorage.getItem("acw_email");
+  if (!email) {
+    alert("Please sign in first.");
+    return;
+  }
+
+  const oldp = prompt("Enter your current password:");
+  if (!oldp) return;
+  const newp = prompt("Enter your new password:");
+  if (!newp) return;
+
+  const url = `${CONFIG.BASE_URL}?action=changePassword&email=${encodeURIComponent(email)}&old=${encodeURIComponent(oldp)}&new=${encodeURIComponent(newp)}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        alert("✅ Password changed successfully!");
+      } else {
+        alert("❌ Error: " + (data.error || "unknown"));
+      }
+    })
+    .catch(err => {
+      console.error("❌ Change password failed:", err);
+      alert("Server error.");
+    });
+}
+
+// =======================================================
+// 🔐 SESIÓN PERSISTENTE
+// =======================================================
+async function loginUser() {
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value.trim();
+  if (!email || !password) {
+    alert("Please enter your email and password");
+    return;
+  }
+
+  try {
+    const url = `${CONFIG.BASE_URL}?action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.ok) {
+      // 🧠 Guarda sesión en localStorage
+      localStorage.setItem("acw_email", email);
+      localStorage.setItem("acw_name", data.name);
+      localStorage.setItem("acw_role", data.role);
+      document.getElementById("login").style.display = "none";
+      document.getElementById("welcome").style.display = "block";
+      getSchedule(email);
+    } else {
+      alert("Invalid credentials");
+    }
+  } catch (err) {
+    alert("Connection error");
+    console.error(err);
+  }
+}
+
+// 🧠 Si ya hay sesión guardada, inicia automático
+window.addEventListener("DOMContentLoaded", () => {
+  loadActiveWeek();
+  const savedEmail = localStorage.getItem("acw_email");
+  if (savedEmail) {
+    document.getElementById("email").value = savedEmail;
+    loginUser();
+  }
+});
+
+// =======================================================
+// 📅 SEMANA ACTIVA (sin emoji)
+// =======================================================
+async function loadActiveWeek() {
+  try {
+    const url = `${CONFIG.BASE_URL}?action=getActiveWeek`;
+    const res = await fetch(url);
+    const data = await res.json();
+    document.getElementById("activeWeek").textContent = data.week || "Unavailable";
+  } catch (err) {
+    console.error(err);
+    document.getElementById("activeWeek").textContent = "Error";
+  }
+}

@@ -1,240 +1,134 @@
 /* ===========================================================
-   💎 ACW Style – Blue Glass Panel v4.0
-   Author: Johan A. Giraldo | Allston Car Wash
+   ACW — Fondo azul metálico fijo + Glass minimal
    =========================================================== */
 
-/* Cuadro central translúcido */
+/* Fondo azul metálico fijo (sin orbes ni animaciones) */
+body {
+  background: radial-gradient(1000px 800px at 30% 20%, #0c2b55 0%, #081a33 40%, #071425 70%, #050e1b 100%) fixed,
+              linear-gradient(135deg, #0e2a59 0%, #092041 100%) fixed;
+  background-blend-mode: overlay, normal;
+  color: #eef5ff;
+}
+
+/* Tarjeta principal tipo glass minimal */
 .container {
-  background: rgba(20, 40, 90, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5),
-              inset 0 0 20px rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
-  padding: 50px 60px;
-  width: 420px;
-  max-width: 90%;
-  text-align: center;
-  color: #f5f8ff;
-  margin: auto;
-  position: relative;
-  z-index: 10;
-  animation: fadeInUp 1s ease;
+  max-width: 760px;           /* más aire sin verse enorme */
+  margin: 48px auto;
+  padding: 28px 32px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Títulos y subtítulos */
+h1, h2, h3 {
+  color: #cfe3ff;
+  letter-spacing: 0.3px;
+}
+#userRole,
+#schedule p,
+.week-header p {
+  color: #b7c9eb;
 }
 
-/* Logo */
-#logo {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 15px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: #a8cfff;
-  text-shadow: 0 0 10px rgba(0,140,255,0.4);
-  transform: rotate(-12deg);
-}
-
-/* Título y texto */
-h1 {
-  font-size: 23px;
-  color: #cfe4ff;
-  margin-bottom: 10px;
-  text-shadow: 0 0 12px rgba(0, 100, 255, 0.6);
-}
-
-#activeWeek {
-  font-size: 15px;
-  color: #a8cfff;
-  margin-bottom: 20px;
-}
-
-/* Inputs */
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.12);
+/* Botones principales (sign in / logout / update) */
+button,
+.btn {
+  background: linear-gradient(135deg, #2f7cff 0%, #1762e6 50%, #0f4cc7 100%);
+  border: 1px solid rgba(255,255,255,0.14);
   color: #ffffff;
-  font-size: 15px;
-  margin-bottom: 15px;
-  outline: none;
-  transition: 0.25s;
-}
-
-input:focus {
-  border-color: #007aff;
-  background: rgba(255,255,255,0.18);
-}
-
-/* Botón Sign In */
-button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #007aff, #0050d4);
-  border: none;
   border-radius: 10px;
-  color: white;
-  font-size: 16px;
+  padding: 11px 16px;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 15px rgba(0,120,255,0.4);
+  transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+}
+button:hover,
+.btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(23, 98, 230, .35);
+}
+button:active,
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
-button:hover {
-  background: linear-gradient(135deg, #1a8bff, #0060f0);
-  transform: scale(1.03);
+/* Inputs (email / password / settings) */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  color: #eaf2ff;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 10px;
+  padding: 11px 12px;
+  outline: none;
+}
+input::placeholder { color: #c1d2f3; opacity: .7; }
+input:focus {
+  border-color: #5fa0ff;
+  box-shadow: 0 0 0 3px rgba(47,124,255,.18);
 }
 
-/* Tabla de horario */
+/* Tabla glass y tipografía legible */
 .schedule-table {
   width: 100%;
+  margin: 18px 0 6px;
   border-collapse: collapse;
-  margin-top: 25px;
-  font-size: 16px;
-  color: #ffffff;
-  text-align: center;
+  color: #eef5ff;
 }
-
 .schedule-table th {
-  color: #a8cfff;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  padding: 8px;
-  font-weight: 600;
+  text-align: left;
+  font-weight: 700;
+  color: #d7e7ff;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding: 10px;
 }
-
 .schedule-table td {
   padding: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  color: #ffffff;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #eef5ff;
 }
 
+/* Filas alternas con leve relieve */
 .schedule-table tr:nth-child(even) td {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.03);
   border-radius: 8px;
 }
 
-/* Total Hours */
+/* Estado “OFF” y guiones */
+.schedule-table tr td { vertical-align: middle; }
+.schedule-table tr td:nth-child(2) { /* shift col */
+  color: #dfeaff;
+}
+.schedule-table tr[style*="color:#888"] td {  /* OFF */
+  color: #9fb3d8 !important;
+}
+
+/* Totales */
 .total {
-  margin-top: 15px;
-  font-size: 17px;
+  color: #d7e7ff;
   font-weight: 600;
-  color: #ffffff;
-  text-shadow: 0 0 12px rgba(0,150,255,0.5);
-}
-
-/* Footer */
-footer {
-  margin-top: 25px;
-  font-size: 12px;
-  color: #a8cfff;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .container {
-    width: 92%;
-    padding: 35px 25px;
-  }
-  h1 { font-size: 20px; }
-  button { font-size: 15px; }
-}
-.settings-container {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 25px;
-  width: 320px;
-  margin: 25px auto;
   text-align: center;
-  backdrop-filter: blur(12px);
-  color: #eaf1ff;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-}
-
-.settings-container h3 {
-  color: #bcd4ff;
-  margin-bottom: 15px;
-}
-
-.settings-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0 12px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-}
-
-.settings-container button {
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(145deg, #007aff, #005be0);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.settings-container button:hover {
-  transform: scale(1.03);
-}
-.activeTimer {
-  color: #7df9ff;
-  font-weight: 600;
-  text-shadow: 0 0 8px rgba(0,180,255,0.6);
-}
-/* 🧭 Centrar completamente el login */
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0 auto;
-}
-
-#login {
-  width: 100%;
-  max-width: 340px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-#login input,
-#login button {
-  width: 100%;
-}
-.logout-btn {
   margin-top: 10px;
-  background: linear-gradient(145deg, #ff4444, #cc0000);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
+  opacity: .95;
 }
 
-.logout-btn:hover {
-  background: linear-gradient(145deg, #ff6666, #e60000);
-  transform: scale(1.05);
+/* Settings panel (si lo usas) */
+.settings-container {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 16px;
+  border-radius: 14px;
+  margin: 14px 0 20px;
 }
+
+/* Opcional: centra el login en pantallas anchas */
+#login { max-width: 420px; margin: 0 auto; }

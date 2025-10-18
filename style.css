@@ -1,73 +1,59 @@
 /* ===========================================================
-   🕓 Schedule View – Clean White Centered Style
+   🕓 Schedule View – Blue Centered Style
    =========================================================== */
 
-/* Fondo general y texto centrado */
 #schedule {
-  color: #f5f8ff;
   text-align: center;
-  margin-top: 20px;
+  color: #eaf1ff;
+  margin-top: 25px;
 }
 
-/* Encabezado (semana y nombre) */
-#schedule h3 {
+/* Encabezado de semana */
+#schedule h3, #schedule p {
   color: #bcd3ff;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-#schedule p {
-  color: #dce6ff;
-  font-size: 16px;
+  font-size: 17px;
   margin-bottom: 10px;
 }
 
-/* Tabla principal */
+/* Tabla */
 .schedule-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
+  margin: 15px auto;
   font-size: 16px;
-  color: #ffffff;
+  color: #f5f8ff;
 }
 
 .schedule-table th {
-  color: #bcd3ff;
+  color: #9ec4ff;
   font-weight: 600;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  padding: 8px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
 .schedule-table td {
   padding: 10px;
-  color: #f3f6ff;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Día OFF en gris claro */
+.schedule-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.03);
+}
+
 .schedule-table td:first-child {
   color: #bcd3ff;
   font-weight: 500;
 }
 
-.schedule-table tr[style*="color:#888"] td {
-  color: #8fa3c8 !important;
-}
-
 /* Total Hours */
 .total {
   margin-top: 15px;
+  color: #eaf1ff;
   font-size: 16px;
-  color: #f5f8ff;
+  font-weight: 600;
 }
 
-/* Ajuste del contenedor */
-.container {
-  width: 460px;
-  padding: 50px 60px;
-}
-
-/* Texto principal */
-h1, h2, h3, p, td, th {
+/* Mejora visual */
+h1, h2, h3, p, th, td {
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }

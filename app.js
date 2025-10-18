@@ -100,3 +100,45 @@ async function getSchedule(email) {
       `<p style="color:red;">Error connecting to server.</p>`;
   }
 }
+async function changeUserPassword() {
+  const email = localStorage.getItem("acw_email");
+  const newPass = document.getElementById("newPassword").value.trim();
+  const confirm = document.getElementById("confirmPassword").value.trim();
+  const msg = document.getElementById("settingsMsg");
+
+  if (!newPass || !confirm) {
+    msg.textContent = "⚠️ Please fill out both fields.";
+    msg.style.color = "#ffcc00";
+    return;
+  }
+
+  if (newPass !== confirm) {
+    msg.textContent = "❌ Passwords do not match.";
+    msg.style.color = "#ff6666";
+    return;
+  }
+
+  msg.textContent = "⏳ Updating password...";
+  msg.style.color = "#bcd4ff";
+
+  try {
+    const response = await fetch(`${CONFIG.BASE_URL}?action=changePassword`, {
+      method: "POST",
+      body: JSON.stringify({ email, newPassword: newPass }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      msg.textContent = "✅ Password updated successfully!";
+      msg.style.color = "#7CFC00";
+    } else {
+      msg.textContent = "⚠️ Failed to update. Try again.";
+      msg.style.color = "#ff6666";
+    }
+  } catch (err) {
+    msg.textContent = "🚨 Connection error. Try again later.";
+    msg.style.color = "#ff6666";
+  }
+}

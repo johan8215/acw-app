@@ -1,31 +1,58 @@
 /* ===========================================================
-   ACW-App v3.8 Connected Lite – Modern Dark Blue UI
-   Style by Johan A. Giraldo | Allston Car Wash
+   ACW-App v3.8 Connected Lite – Blue Night Edition
+   Author: Johan A. Giraldo (JG) | Allston Car Wash
    =========================================================== */
 
-/* Fondo general */
+/* 🌌 Fondo con animación de burbujas azules */
 body {
   font-family: 'Inter', 'SF Pro Display', sans-serif;
-  background: radial-gradient(circle at 25% 15%, #0a1123 0%, #000610 100%);
-  color: #e8ebf1;
+  background: radial-gradient(circle at 20% 20%, #061226 0%, #010814 100%);
   margin: 0;
+  color: #e6ebff;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
 
-/* Contenedor del login */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,102,255,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 10s infinite ease-in-out alternate;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  right: 10%;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(0,153,255,0.2) 0%, transparent 75%);
+  animation-delay: 5s;
+}
+
+@keyframes float {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-20px); }
+}
+
+/* 🧼 Contenedor principal del login */
 .container {
-  background: rgba(20, 25, 45, 0.6);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(18px);
-  width: 370px;
-  padding: 40px 45px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(15px);
+  width: 360px;
+  padding: 35px 40px;
   text-align: center;
-  animation: fadeIn 1.1s ease-in-out;
+  animation: fadeIn 1.2s ease-in-out;
+  z-index: 10;
 }
 
 @keyframes fadeIn {
@@ -33,29 +60,47 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Título */
+/* 🔷 Logo */
+#logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px auto;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: #9ec4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-15deg);
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(0,140,255,0.3);
+}
+
+/* 🔹 Título */
 h1 {
   font-size: 22px;
-  color: #9ac0ff;
-  letter-spacing: 1px;
-  margin-bottom: 25px;
+  color: #9cc6ff;
+  margin-bottom: 15px;
 }
 
-/* Semana activa */
+/* 📅 Semana activa */
 #activeWeek {
   font-size: 14px;
-  color: #bcd0ff;
+  color: #b0c9ff;
   margin-bottom: 25px;
 }
 
-/* Inputs */
+/* 📨 Inputs */
 input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 12px;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 8px;
-  background: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.08);
   color: #fff;
   font-size: 15px;
   outline: none;
@@ -64,15 +109,15 @@ input[type="password"] {
 }
 
 input:focus {
-  border-color: #2f8eff;
+  border-color: #007aff;
   background: rgba(255,255,255,0.12);
 }
 
-/* Botón principal */
+/* 🔵 Botón principal */
 button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(145deg, #007aff, #005bea);
+  background: linear-gradient(145deg, #007aff, #0047b0);
   color: white;
   border: none;
   border-radius: 8px;
@@ -80,21 +125,20 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: 0.25s ease;
-  margin-top: 8px;
 }
 
 button:hover {
-  background: linear-gradient(145deg, #1a82ff, #006aff);
-  transform: scale(1.02);
+  background: linear-gradient(145deg, #1a82ff, #005be0);
+  transform: scale(1.03);
 }
 
-/* Change Password */
+/* ⚙️ Change password link */
 .link-area {
-  margin-top: 14px;
+  margin-top: 15px;
 }
 
 .link-area a {
-  color: #8ab4f8;
+  color: #7aa8ff;
   font-size: 14px;
   text-decoration: none;
 }
@@ -103,15 +147,15 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Footer */
+/* 📞 Footer */
 footer {
   margin-top: 25px;
   font-size: 12px;
-  color: #a3b4d4;
+  color: #9eb0d4;
 }
 
 footer a {
-  color: #8ab4f8;
+  color: #7aa8ff;
   text-decoration: none;
 }
 

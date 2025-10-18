@@ -1,6 +1,6 @@
 /* ===========================================================
-   ACW-App Login + Schedule Viewer (v3.8 Connected)
-   Johan A. Giraldo & Sky
+   ACW-App v3.8 Connected Lite – FIX JSON Compatibility
+   Author: Johan A. Giraldo (JG) + Sky
    =========================================================== */
 
 async function loginUser() {
@@ -20,10 +20,8 @@ async function loginUser() {
     if (data.ok) {
       document.getElementById("login").style.display = "none";
       document.getElementById("welcome").style.display = "block";
-      document.getElementById("userName").textContent = data.name;
-      document.getElementById("userRole").textContent = data.role;
-
-      // 👇 Nueva llamada con email real (ya autenticado)
+      document.getElementById("userName").textContent = data.name || "Employee";
+      document.getElementById("userRole").textContent = data.role || "staff";
       getSchedule(email);
     } else {
       alert("Invalid credentials");
@@ -34,18 +32,12 @@ async function loginUser() {
   }
 }
 
-/* ===========================================================
-   Obtener Horario del Empleado
-   =========================================================== */
 async function getSchedule(email) {
   try {
-    // 🔗 Cambiado: usa el endpoint "getSchedule" (con email)
     const url = `${CONFIG.BASE_URL}?action=getSchedule&email=${encodeURIComponent(email)}`;
-    console.log("📡 Fetching schedule from:", url);
-
     const res = await fetch(url);
     const data = await res.json();
-    console.log("📦 Data recibida:", data);
+    console.log("📦 JSON recibido:", data);
 
     if (!data.ok) {
       document.getElementById("schedule").innerHTML =
@@ -53,16 +45,15 @@ async function getSchedule(email) {
       return;
     }
 
-    const name = data.name || "Employee";
+    // Detecta nombre del campo correcto (name o employee)
+    const name = data.name || data.employee || "Employee";
     const week = data.week || "N/A";
+    const total = data.total || 0;
     const days = data.days || [];
 
-    // 💎 Construir tabla de horario
     let html = `
-      <div class="week-header">
-        <h3>📅 Week of ${week}</h3>
-        <p><b>${name}</b></p>
-      </div>
+      <h3>📅 Week of ${week}</h3>
+      <p><b>${name}</b></p>
       <table class="schedule-table">
         <thead>
           <tr><th>Day</th><th>Shift</th><th>Hours</th></tr>
@@ -72,28 +63,23 @@ async function getSchedule(email) {
 
     for (const d of days) {
       const shift = d.shift?.trim() || "—";
-      const hours = d.hours ? d.hours : "";
-      let rowStyle = "";
+      const hours = d.hours || "";
+      let color = "";
 
-      if (/off/i.test(shift)) rowStyle = "style='color:#888;'";
-      else if (shift === "—") rowStyle = "style='color:#bbb;'";
-      else rowStyle = "style='color:#111; font-weight:500;'";
+      if (/off/i.test(shift)) color = "style='color:#888;'";
+      else if (!shift || shift === "—") color = "style='color:#bbb;'";
+      else color = "style='color:#111;font-weight:500;'";
 
-      html += `<tr ${rowStyle}>
-        <td>${d.name}</td>
-        <td>${shift}</td>
-        <td>${hours}</td>
-      </tr>`;
+      html += `<tr ${color}><td>${d.name}</td><td>${shift}</td><td>${hours}</td></tr>`;
     }
 
     html += `
         </tbody>
       </table>
-      <p class="total">🕓 Total Hours: <b>${data.total}</b></p>
+      <p class="total">🕓 Total Hours: <b>${total}</b></p>
     `;
 
     document.getElementById("schedule").innerHTML = html;
-
   } catch (err) {
     console.error("❌ Error loading schedule:", err);
     document.getElementById("schedule").innerHTML =

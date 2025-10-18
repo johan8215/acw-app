@@ -44,14 +44,15 @@ body::after {
   to { transform: translateY(-25px); }
 }
 
+/* 🧼 Contenedor principal del login (versión más grande) */
 .container {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(15px);
-  width: 360px;
-  padding: 35px 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  width: 420px;              /* antes 360px → más ancho */
+  padding: 45px 50px;        /* más espacio interno */
   text-align: center;
   animation: fadeIn 1s ease-in-out;
   z-index: 10;

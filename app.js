@@ -41,7 +41,7 @@ async function loginUser() {
 }
 
 /* ===========================================================
-   📅 OBTENER HORARIO DEL EMPLEADO (con cronómetro ⏱️)
+   📅 OBTENER HORARIO DEL EMPLEADO (con cronómetro ⏱️ mejorado)
    =========================================================== */
 async function getSchedule(email) {
   try {
@@ -75,19 +75,25 @@ async function getSchedule(email) {
     window.activeShifts = [];
 
     for (const d of days) {
-      const shift = d.shift?.trim() || "";
+      const shift = (d.shift || "").trim();
       let hoursDisplay = d.hours || "";
-      let rowStyle = "";
+      let rowStyle = /off/i.test(shift)
+        ? "style='color:#888;'"
+        : "style='color:#eaf1ff; font-weight:500;'";
 
-      if (/off/i.test(shift)) rowStyle = "style='color:#888;'";
-      else if (shift === "—") rowStyle = "style='color:#bbb;'";
-      else rowStyle = "style='color:#eaf1ff; font-weight:500;'";
-
-      // Cronómetro cuando hay “7:30.” activo
+      // 🟢 Modo 1: turno activo “7:30.”
       if (/^\d{1,2}[:.]?\d{0,2}\.?$/.test(shift)) {
         const startTime = shift.replace(/\./g, "").trim();
         window.activeShifts.push({ day: d.name, startTime });
-        hoursDisplay = `<span class='activeTimer' data-time='${startTime}'>⏱️ 0.0</span>`;
+        hoursDisplay = `<span class='activeTimer' data-time='${startTime}'>⏱️ ${calcActiveHours(startTime).toFixed(1)}h</span>`;
+      }
+      // 🟣 Modo 2: turno cerrado “7:30. - 5” (detiene reloj y calcula fijo)
+      else if (/^\d{1,2}[:.]?\d{0,2}\s*[-–]\s*\d{1,2}/.test(shift)) {
+        const parts = shift.split("-");
+        const start = parts[0].replace(/\./g, "").trim();
+        const end = parts[1].trim();
+        const fixed = calcFixedHours(start, end);
+        hoursDisplay = `${fixed.toFixed(1)}h`;
       }
 
       html += `<tr ${rowStyle}>
@@ -100,13 +106,12 @@ async function getSchedule(email) {
     html += `
         </tbody>
       </table>
-      <p class="total">🕓 Total Hours: <b>${data.total}</b></p>
+      <p id="totalHours" class="total">🕓 Total Hours: <b>${data.total}</b></p>
     `;
 
     document.getElementById("schedule").innerHTML = html;
-
-    updateTimers();
-    setInterval(updateTimers, 60000);
+    updateTimers(); // primera actualización inmediata
+    setInterval(updateTimers, 60000); // refresca cada minuto
 
   } catch (err) {
     console.error("❌ Error loading schedule:", err);
@@ -116,27 +121,55 @@ async function getSchedule(email) {
 }
 
 /* ===========================================================
-   ⏱️ ACTUALIZADOR DE CRONÓMETROS
+   ⏱️ CALCULO DE HORAS (activo / fijo)
+   =========================================================== */
+function calcActiveHours(startTime) {
+  const now = new Date();
+  const [h, m = 0] = startTime.split(":").map(Number);
+  const start = new Date();
+  start.setHours(h);
+  start.setMinutes(m);
+  let diff = (now - start) / (1000 * 60 * 60);
+  if (diff < 0) diff += 12;
+  return diff > 0 ? Math.round(diff * 10) / 10 : 0;
+}
+
+function calcFixedHours(a, b) {
+  const parse = s => {
+    s = s.replace(/\./g, ":").trim();
+    const [h, m = 0] = s.split(":").map(Number);
+    return h + m / 60;
+  };
+  let diff = parse(b) - parse(a);
+  if (diff < 0) diff += 12;
+  return Math.round(diff * 10) / 10;
+}
+
+/* ===========================================================
+   ⏱️ ACTUALIZADOR DE CRONÓMETROS + TOTAL
    =========================================================== */
 function updateTimers() {
   const now = new Date();
   const timers = document.querySelectorAll(".activeTimer");
+  let dynamicTotal = 0;
 
   timers.forEach(el => {
     const startStr = el.dataset.time;
     if (!startStr) return;
-
-    const [h, m = 0] = startStr.split(":").map(Number);
-    const start = new Date();
-    start.setHours(h);
-    start.setMinutes(m);
-
-    let diff = (now - start) / (1000 * 60 * 60);
-    if (diff < 0) diff += 12;
-    const rounded = Math.round(diff * 10) / 10;
-
-    el.textContent = `⏱️ ${rounded.toFixed(1)}h`;
+    const h = calcActiveHours(startStr);
+    dynamicTotal += h;
+    el.textContent = `⏱️ ${h.toFixed(1)}h`;
   });
+
+  // 🧮 Recalcula el total semanal sumando los valores dinámicos
+  const fixedCells = document.querySelectorAll("#scheduleBody td:nth-child(3):not(.activeTimer)");
+  fixedCells.forEach(cell => {
+    const val = parseFloat(cell.textContent);
+    if (!isNaN(val)) dynamicTotal += val;
+  });
+
+  const totalEl = document.getElementById("totalHours");
+  if (totalEl) totalEl.innerHTML = `🕓 Total Hours: <b>${dynamicTotal.toFixed(1)}</b>`;
 }
 
 /* ===========================================================

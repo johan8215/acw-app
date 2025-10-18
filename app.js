@@ -3,38 +3,48 @@
    Johan A. Giraldo & Sky
    =========================================================== */
 
-async function loginUser() {
-  const email = document.getElementById("email").value.trim().toLowerCase();
-  const password = document.getElementById("password").value.trim();
+async function changeUserPassword() {
+  const email = document.getElementById("email")?.value || localStorage.getItem("acw_email");
+  const newPass = document.getElementById("newPassword").value.trim();
+  const confirm = document.getElementById("confirmPassword").value.trim();
+  const msg = document.getElementById("settingsMsg");
 
-  if (!email || !password) {
-    alert("Please enter your email and password");
+  if (!newPass || !confirm) {
+    msg.textContent = "⚠️ Please fill out both fields.";
+    msg.style.color = "#ffcc00";
     return;
   }
 
+  if (newPass !== confirm) {
+    msg.textContent = "❌ Passwords do not match.";
+    msg.style.color = "#ff6666";
+    return;
+  }
+
+  msg.textContent = "⏳ Updating password...";
+  msg.style.color = "#bcd4ff";
+
   try {
-    const url = `${CONFIG.BASE_URL}?action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const response = await fetch(`${CONFIG.BASE_URL}?action=changePassword&email=${encodeURIComponent(email)}&new=${encodeURIComponent(newPass)}`, {
+      method: "GET"
+    });
 
-    if (data.ok) {
-      // ✅ Guarda el email del usuario para usarlo luego en "changeUserPassword()"
-      localStorage.setItem("acw_email", email);
+    const data = await response.json();
 
-      // 👇 Aquí continúa tu código normal
-      document.getElementById("login").style.display = "none";
-      document.getElementById("welcome").style.display = "block";
-      document.getElementById("userName").textContent = data.name;
-      document.getElementById("userRole").textContent = data.role;
-
-      // Llama al horario del usuario logueado
-      getSchedule(email);
+    if (data.ok || data.success) {
+      msg.textContent = "✅ Password updated successfully!";
+      msg.style.color = "#7CFC00";
+      document.getElementById("newPassword").value = "";
+      document.getElementById("confirmPassword").value = "";
     } else {
-      alert("Invalid credentials");
+      msg.textContent = "⚠️ Failed to update. Try again.";
+      msg.style.color = "#ff6666";
     }
+
   } catch (err) {
-    alert("Connection error");
-    console.error(err);
+    msg.textContent = "🚨 Connection error. Try again later.";
+    msg.style.color = "#ff6666";
+    console.error("❌ Error:", err);
   }
 }
 

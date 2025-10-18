@@ -1,57 +1,59 @@
 /* ===========================================================
-   ACW-App v3.8 Connected Lite – Blue Night Edition
-   Author: Johan A. Giraldo (JG) | Allston Car Wash
+   ACW-App v3.8 Connected Lite – Original Blue Style
+   Author: Johan A. Giraldo | Allston Car Wash
    =========================================================== */
 
-/* 🌌 Fondo con animación de burbujas azules */
 body {
   font-family: 'Inter', 'SF Pro Display', sans-serif;
-  background: radial-gradient(circle at 20% 20%, #061226 0%, #010814 100%);
+  background: radial-gradient(circle at 20% 20%, #0a1435 0%, #000814 100%);
+  color: #eaf1ff;
   margin: 0;
-  color: #e6ebff;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  overflow: hidden;
 }
 
-body::before,
+body::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,102,255,0.2) 0%, transparent 80%);
+  border-radius: 50%;
+  top: -100px;
+  left: -150px;
+  animation: float 10s ease-in-out infinite alternate;
+}
+
 body::after {
   content: "";
   position: absolute;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0,102,255,0.25) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float 10s infinite ease-in-out alternate;
-}
-
-body::after {
   width: 500px;
   height: 500px;
-  right: 10%;
-  bottom: 10%;
-  background: radial-gradient(circle, rgba(0,153,255,0.2) 0%, transparent 75%);
-  animation-delay: 5s;
+  background: radial-gradient(circle, rgba(0,153,255,0.25) 0%, transparent 80%);
+  border-radius: 50%;
+  bottom: -120px;
+  right: -120px;
+  animation: float 12s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes float {
   from { transform: translateY(0px); }
-  to { transform: translateY(-20px); }
+  to { transform: translateY(-25px); }
 }
 
-/* 🧼 Contenedor principal del login */
 .container {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(15px);
   width: 360px;
   padding: 35px 40px;
   text-align: center;
-  animation: fadeIn 1.2s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
   z-index: 10;
 }
 
@@ -60,40 +62,35 @@ body::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 🔷 Logo */
 #logo {
   width: 80px;
   height: 80px;
-  margin: 0 auto 15px auto;
+  margin: 0 auto 15px;
   background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 10px;
-  color: #9ec4ff;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: rotate(-15deg);
-  font-weight: bold;
-  letter-spacing: 2px;
   font-size: 18px;
-  text-shadow: 0 0 10px rgba(0,140,255,0.3);
+  color: #9ec4ff;
+  font-weight: bold;
+  transform: rotate(-15deg);
+  text-shadow: 0 0 10px rgba(0,150,255,0.4);
 }
 
-/* 🔹 Título */
 h1 {
   font-size: 22px;
   color: #9cc6ff;
   margin-bottom: 15px;
 }
 
-/* 📅 Semana activa */
 #activeWeek {
   font-size: 14px;
-  color: #b0c9ff;
+  color: #b8d0ff;
   margin-bottom: 25px;
 }
 
-/* 📨 Inputs */
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -113,11 +110,10 @@ input:focus {
   background: rgba(255,255,255,0.12);
 }
 
-/* 🔵 Botón principal */
 button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(145deg, #007aff, #0047b0);
+  background: linear-gradient(145deg, #007aff, #004bba);
   color: white;
   border: none;
   border-radius: 8px;
@@ -132,7 +128,6 @@ button:hover {
   transform: scale(1.03);
 }
 
-/* ⚙️ Change password link */
 .link-area {
   margin-top: 15px;
 }
@@ -147,7 +142,6 @@ button:hover {
   text-decoration: underline;
 }
 
-/* 📞 Footer */
 footer {
   margin-top: 25px;
   font-size: 12px;

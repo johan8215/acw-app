@@ -30,8 +30,6 @@ async function loginUser() {
       document.getElementById("userName").textContent = data.name;
       document.getElementById("userRole").textContent = data.role;
       localStorage.setItem("acw_email", email);
-
-      // Cargar horario con cronómetro visual
       getSchedule(email);
     } else {
       alert("Invalid credentials");
@@ -74,7 +72,6 @@ async function getSchedule(email) {
         <tbody id="scheduleBody">
     `;
 
-    // 🧩 Guardar turnos activos
     window.activeShifts = [];
 
     for (const d of days) {
@@ -82,12 +79,11 @@ async function getSchedule(email) {
       let hoursDisplay = d.hours || "";
       let rowStyle = "";
 
-      // Colores básicos
       if (/off/i.test(shift)) rowStyle = "style='color:#888;'";
       else if (shift === "—") rowStyle = "style='color:#bbb;'";
       else rowStyle = "style='color:#eaf1ff; font-weight:500;'";
 
-      // Si el turno está en formato “7:30.” → activo
+      // Cronómetro cuando hay “7:30.” activo
       if (/^\d{1,2}[:.]?\d{0,2}\.?$/.test(shift)) {
         const startTime = shift.replace(/\./g, "").trim();
         window.activeShifts.push({ day: d.name, startTime });
@@ -109,7 +105,6 @@ async function getSchedule(email) {
 
     document.getElementById("schedule").innerHTML = html;
 
-    // ⏱️ Actualizar cronómetros cada minuto
     updateTimers();
     setInterval(updateTimers, 60000);
 
@@ -121,7 +116,7 @@ async function getSchedule(email) {
 }
 
 /* ===========================================================
-   ⏱️ ACTUALIZADOR DE CRONÓMETROS (solo app visual)
+   ⏱️ ACTUALIZADOR DE CRONÓMETROS
    =========================================================== */
 function updateTimers() {
   const now = new Date();
@@ -136,8 +131,8 @@ function updateTimers() {
     start.setHours(h);
     start.setMinutes(m);
 
-    let diff = (now - start) / (1000 * 60 * 60); // horas
-    if (diff < 0) diff += 12; // corrige AM/PM
+    let diff = (now - start) / (1000 * 60 * 60);
+    if (diff < 0) diff += 12;
     const rounded = Math.round(diff * 10) / 10;
 
     el.textContent = `⏱️ ${rounded.toFixed(1)}h`;
@@ -169,9 +164,7 @@ async function changeUserPassword() {
   msg.style.color = "#bcd4ff";
 
   try {
-    const response = await fetch(`${CONFIG.BASE_URL}?action=changePassword&email=${encodeURIComponent(email)}&new=${encodeURIComponent(newPass)}`, {
-      method: "GET"
-    });
+    const response = await fetch(`${CONFIG.BASE_URL}?action=changePassword&email=${encodeURIComponent(email)}&new=${encodeURIComponent(newPass)}`, { method: "GET" });
     const data = await response.json();
     console.log("🔄 Password change response:", data);
 
@@ -194,45 +187,7 @@ async function changeUserPassword() {
 }
 
 /* ===========================================================
-   ⚙️ TOGGLE SETTINGS PANEL
-   =========================================================== */
-function toggleSettings() {
-  const panel = document.getElementById('settingsPanel');
-  panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-}
-/* ===========================================================
-   🔁 AUTO-LOGIN (mantiene la sesión activa)
-   =========================================================== */
-window.addEventListener("load", () => {
-  const savedEmail = localStorage.getItem("acw_email");
-  if (savedEmail) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("welcome").style.display = "block";
-    getSchedule(savedEmail);
-  }
-});
-/* ===========================================================
    🚪 LOGOUT USER (cierra sesión limpia)
-   =========================================================== */
-function logoutUser() {
-  localStorage.removeItem("acw_email");
-  location.reload(); // refresca y vuelve al login
-}
-/* ===========================================================
-   ⚙️ SETTINGS MODAL HANDLERS
-   =========================================================== */
-function openSettings() {
-  document.getElementById("settingsModal").style.display = "block";
-}
-function closeSettings() {
-  document.getElementById("settingsModal").style.display = "none";
-}
-function togglePasswordPanel() {
-  const panel = document.getElementById("passwordPanel");
-  panel.style.display = (panel.style.display === "block") ? "none" : "block";
-}
-/* ===========================================================
-   🚪 LOGOUT USER
    =========================================================== */
 function logoutUser() {
   localStorage.removeItem("acw_email");
@@ -240,7 +195,7 @@ function logoutUser() {
 }
 
 /* ===========================================================
-   🔁 AUTO-LOGIN (mantiene sesión activa)
+   🔁 AUTO-LOGIN (mantiene la sesión activa)
    =========================================================== */
 window.addEventListener("load", () => {
   const savedEmail = localStorage.getItem("acw_email");

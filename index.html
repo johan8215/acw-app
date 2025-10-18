@@ -59,5 +59,35 @@
       </div>
     </div>
   </div>
+  <!-- ⚙️ BOTÓN DE CONFIGURACIÓN -->
+<button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
+
+<!-- 🧩 PANEL FLOTANTE -->
+<div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSettings()">&times;</span>
+    <h3>⚙️ Settings</h3>
+    <hr>
+    <button class="mini-btn" onclick="togglePasswordPanel()">Change Password</button>
+    <button class="mini-btn" onclick="logoutUser()">🚪 Log Out</button>
+
+    <!-- 🔒 PANEL DE CAMBIO DE PASSWORD -->
+    <div id="passwordPanel" style="display:none; margin-top:10px;">
+      <input type="password" id="newPassword" placeholder="New password">
+      <input type="password" id="confirmPassword" placeholder="Confirm password">
+      <button class="mini-btn" onclick="changeUserPassword()">Save</button>
+      <p id="settingsMsg"></p>
+    </div>
+
+    <hr>
+
+    <div class="app-info">
+      <p>🌐 <a href="https://allstoncarwash.com" target="_blank">allstoncarwash.com</a></p>
+      <p>📞 (617) 254-3200</p>
+      <p>⚙️ ACW-App v3.8 Connected Stable</p>
+      <p class="powered">Powered by <b>JAG15</b> | Allston Car Wash © 2025</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>

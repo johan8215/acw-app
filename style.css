@@ -337,3 +337,40 @@ button:hover {
   background: rgba(255,255,255,0.25);
   transform: rotate(90deg);
 }
+/* ===========================================================
+   🌐 BARRA INFERIOR GLOBAL (tipo status bar)
+   =========================================================== */
+.acw-statusbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  padding: 6px 10px;
+  color: #bcd4ff;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  z-index: 20;
+}
+.acw-statusbar a {
+  color: #cfe3ff;
+  text-decoration: none;
+}
+.acw-statusbar a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+@media (max-width: 600px) {
+  .acw-statusbar {
+    flex-direction: column;
+    font-size: 12.5px;
+    gap: 4px;
+    padding: 10px;
+  }
+}

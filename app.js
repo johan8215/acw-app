@@ -31,7 +31,7 @@ async function loginUser() {
       document.getElementById("userRole").textContent = data.role;
       localStorage.setItem("acw_email", email);
 
-      // Cargar horario
+      // Cargar horario con cronómetro visual
       getSchedule(email);
     } else {
       alert("Invalid credentials");
@@ -43,32 +43,7 @@ async function loginUser() {
 }
 
 /* ===========================================================
-   📅 OBTENER HORARIO DEL EMPLEADO
-   =========================================================== */
-async function getSchedule(email) {
-  try {
-    const url = `${CONFIG.BASE_URL}?action=getSchedule&email=${encodeURIComponent(email)}`;
-    console.log("📡 Fetching schedule from:", url);
-
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log("📦 Schedule data:", data);
-
-    if (!data.ok) {
-      document.getElementById("schedule").innerHTML =
-        `<p style="color:red;">No schedule found for this account.</p>`;
-      return;
-    }
-
-    const name = data.name || "Employee";
-    const week = data.week || "N/A";
-    const days = data.days || [];
-
-    // 💎 Construir tabla de horario
-    let html = `
-      <div class="week-header">
-/* ===========================================================
-   📅 OBTENER HORARIO DEL EMPLEADO (con cronómetro activo ⏱️)
+   📅 OBTENER HORARIO DEL EMPLEADO (con cronómetro ⏱️)
    =========================================================== */
 async function getSchedule(email) {
   try {
@@ -95,9 +70,7 @@ async function getSchedule(email) {
         <p><b>${name}</b></p>
       </div>
       <table class="schedule-table">
-        <thead>
-          <tr><th>Day</th><th>Shift</th><th>Hours</th></tr>
-        </thead>
+        <thead><tr><th>Day</th><th>Shift</th><th>Hours</th></tr></thead>
         <tbody id="scheduleBody">
     `;
 
@@ -164,7 +137,7 @@ function updateTimers() {
     start.setMinutes(m);
 
     let diff = (now - start) / (1000 * 60 * 60); // horas
-    if (diff < 0) diff += 12; // corrige casos AM/PM
+    if (diff < 0) diff += 12; // corrige AM/PM
     const rounded = Math.round(diff * 10) / 10;
 
     el.textContent = `⏱️ ${rounded.toFixed(1)}h`;
@@ -172,7 +145,7 @@ function updateTimers() {
 }
 
 /* ===========================================================
-   ⚙️ CAMBIO DE CONTRASEÑA (versión estable)
+   ⚙️ CAMBIO DE CONTRASEÑA
    =========================================================== */
 async function changeUserPassword() {
   const email = document.getElementById("email")?.value || localStorage.getItem("acw_email");

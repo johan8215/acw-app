@@ -1,100 +1,153 @@
 /* ===========================================================
-   🌌 ACW Floating Blue Orbs Background
+   💎 ACW Unified Glass Login v3.9 – Blue Orb Edition
+   Author: Johan A. Giraldo | Allston Car Wash
    =========================================================== */
 
-body {
-  background: radial-gradient(circle at 20% 20%, #0d1a42 0%, #000a1c 100%);
-  color: #eaf1ff;
-  font-family: 'Inter', 'SF Pro Display', sans-serif;
-  margin: 0;
-  height: 100vh;
+/* Contenedor principal */
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  width: 440px;
+  padding: 45px 50px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  z-index: 10;
+  color: #f5f8ff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo */
+#logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
+  font-size: 18px;
+  color: #9ec4ff;
+  font-weight: bold;
+  transform: rotate(-15deg);
+  text-shadow: 0 0 10px rgba(0,150,255,0.4);
 }
 
-/* 🔵 Orb 1 (superior izquierda) */
-body::before {
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -120px;
-  left: -160px;
-  background: radial-gradient(circle, rgba(0,122,255,0.35) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: float1 12s ease-in-out infinite alternate;
-}
-
-/* 🔵 Orb 2 (inferior derecha) */
-body::after {
-  content: "";
-  position: absolute;
-  width: 520px;
-  height: 520px;
-  bottom: -140px;
-  right: -120px;
-  background: radial-gradient(circle, rgba(0,180,255,0.25) 0%, transparent 80%);
-  border-radius: 50%;
-  animation: float2 14s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes float1 {
-  from { transform: translateY(0px) scale(1); }
-  to { transform: translateY(-30px) scale(1.05); }
-}
-
-@keyframes float2 {
-  from { transform: translateY(0px) scale(1); }
-  to { transform: translateY(25px) scale(1.08); }
-}
-/* ===========================================================
-   ✨ ACW Text Contrast Fix (Bright White)
-   =========================================================== */
-
-/* Texto general */
-body, h1, h2, h3, h4, h5, h6, p, span, td, th, label {
-  color: #f5f8ff !important;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-}
-
-/* Encabezados principales */
-h1, h2 {
-  color: #bcd9ff !important;
-}
-
-/* Texto de las tablas */
-.schedule-table th,
-.schedule-table td {
-  color: #ffffff !important;
-}
-
-/* Total hours y etiquetas */
-.total {
-  color: #ffffff !important;
+/* Encabezado principal */
+h1 {
+  font-size: 23px;
+  color: #bcd9ff;
   font-weight: 600;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(0, 120, 255, 0.6);
 }
 
-/* Inputs y placeholders */
+/* Texto secundario */
+#activeWeek, #userRole {
+  font-size: 15px;
+  color: #d7e5ff;
+  margin-bottom: 18px;
+}
+
+/* Campos de login */
 input[type="email"],
-input[type="password"],
-input,
-button {
-  color: #ffffff !important;
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 15px;
+  transition: 0.25s;
+}
+input:focus {
+  border-color: #007aff;
+  background: rgba(255,255,255,0.12);
 }
 
-/* Enlaces */
-a {
-  color: #7ab8ff !important;
+/* Botón principal */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(145deg, #007aff, #004bba);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+button:hover {
+  background: linear-gradient(145deg, #1a82ff, #005be0);
+  transform: scale(1.03);
+}
+
+/* Tabla del horario */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px auto 10px;
+  font-size: 16px;
+  color: #f5f8ff;
+}
+.schedule-table th {
+  color: #a9c9ff;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding: 8px;
+}
+.schedule-table td {
+  padding: 10px;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.schedule-table tr:nth-child(even) td {
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+}
+
+/* Total hours */
+.total {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 120, 255, 0.6);
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #9eb0d4;
+}
+footer a {
+  color: #7aa8ff;
   text-decoration: none;
 }
-a:hover {
+footer a:hover {
   text-decoration: underline;
 }
 
-/* Para asegurar contraste en login */
-.container {
-  color: #f5f8ff !important;
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 35px 25px;
+  }
+  h1 { font-size: 20px; }
+  input, button { font-size: 14px; }
+  .schedule-table td, .schedule-table th { font-size: 14px; }
 }

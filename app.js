@@ -231,3 +231,22 @@ function togglePasswordPanel() {
   const panel = document.getElementById("passwordPanel");
   panel.style.display = (panel.style.display === "block") ? "none" : "block";
 }
+/* ===========================================================
+   🚪 LOGOUT USER
+   =========================================================== */
+function logoutUser() {
+  localStorage.removeItem("acw_email");
+  location.reload();
+}
+
+/* ===========================================================
+   🔁 AUTO-LOGIN (mantiene sesión activa)
+   =========================================================== */
+window.addEventListener("load", () => {
+  const savedEmail = localStorage.getItem("acw_email");
+  if (savedEmail) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+    getSchedule(savedEmail);
+  }
+});

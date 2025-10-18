@@ -23,9 +23,14 @@
 
     <!-- 👋 WELCOME + SETTINGS -->
     <div id="welcome" style="display:none;">
-      <h2>Welcome, <span id="userName"></span></h2>
-      <p>Role: <span id="userRole"></span></p>
-      <p id="activeWeek"></p>
+  <h2>Welcome, <span id="userName"></span></h2>
+  <p>Role: <span id="userRole"></span></p>
+  
+  <!-- 🔒 BOTÓN DE CERRAR SESIÓN -->
+  <button onclick="logoutUser()" class="logout-btn">Logout</button>
+  
+  <div id="schedule"></div>
+</div>
 
       <!-- ⚙️ BOTÓN PARA ABRIR CONFIGURACIÓN -->
       <button class="settings-btn" onclick="toggleSettings()">⚙️ Settings</button>

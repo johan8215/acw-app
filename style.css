@@ -274,3 +274,66 @@ button:hover {
   font-size: 12px;
   color: #88a6d9;
 }
+/* ===========================================================
+   🧭 INFO EN ESQUINAS INFERIORES
+   =========================================================== */
+.corner {
+  position: fixed;
+  font-size: 13px;
+  color: #aecdff;
+  opacity: 0.8;
+  z-index: 50;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.corner a {
+  color: #bcd4ff;
+  text-decoration: none;
+}
+.corner a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* 🟦 Posiciones específicas */
+.bottom-left {
+  bottom: 12px;
+  left: 18px;
+}
+.bottom-left-mid {
+  bottom: 12px;
+  left: 190px;
+}
+.bottom-right-mid {
+  bottom: 12px;
+  right: 85px;
+  text-align: right;
+  font-size: 12.8px;
+  color: #88a6d9;
+}
+
+/* Efecto suave al pasar el mouse */
+.corner:hover {
+  opacity: 1;
+}
+
+/* ⚙️ Botón flotante (ajustado a la esquina) */
+.gear-btn {
+  position: fixed;
+  bottom: 14px;
+  right: 18px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #eaf1ff;
+  font-size: 22px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+  transition: all 0.25s ease;
+}
+.gear-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: rotate(90deg);
+}

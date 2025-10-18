@@ -74,8 +74,12 @@ async function getSchedule(email) {
 
     document.getElementById("schedule").innerHTML = html;
   } catch (err) {
-    console.error("❌ Error loading schedule:", err);
-    document.getElementById("schedule").innerHTML =
-      `<p style="color:red;">Error loading schedule.</p>`;
+    console.error("❌ Connection error details:", err);
+
+    // Intentar mostrar respuesta real si el servidor respondió
+    if (err && err.message) {
+      alert("Server error: " + err.message);
+    } else {
+      alert("❌ Connection failed. Please check the deployment permissions or BASE_URL.");
+    }
   }
-}

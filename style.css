@@ -221,3 +221,19 @@ button:hover {
   font-size: 13px;
   color: #88a6d9;
 }
+/* 🌐 Enlace del website en esquina inferior */
+.corner-link {
+  position: absolute;
+  bottom: 10px;
+  right: 16px;
+  font-size: 13px;
+  color: #a8c7ff;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: 0.25s ease;
+}
+.corner-link:hover {
+  color: #ffffff;
+  opacity: 1;
+  text-decoration: underline;
+}

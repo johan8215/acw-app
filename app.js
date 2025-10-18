@@ -60,7 +60,7 @@ async function getSchedule(email) {
     // 💎 Construir tabla de horario
     let html = `
       <div class="week-header">
-        <h3>📅 Week of ${week}</h3>
+        <h3> Week of ${week}</h3>
         <p><b>${name}</b></p>
       </div>
       <table class="schedule-table">

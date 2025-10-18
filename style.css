@@ -151,3 +151,45 @@ footer {
   h1 { font-size: 20px; }
   button { font-size: 15px; }
 }
+.settings-container {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  width: 320px;
+  margin: 25px auto;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  color: #eaf1ff;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+}
+
+.settings-container h3 {
+  color: #bcd4ff;
+  margin-bottom: 15px;
+}
+
+.settings-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.settings-container button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(145deg, #007aff, #005be0);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.settings-container button:hover {
+  transform: scale(1.03);
+}

@@ -16,7 +16,15 @@
       <input type="password" id="password" placeholder="Password">
       <button onclick="loginUser()">Sign In</button>
     </div>
-
+<div id="settingsPanel" class="settings-container" style="display:none;">
+  <h3>⚙️ Settings</h3>
+  <label for="newPassword">New Password:</label>
+  <input type="password" id="newPassword" placeholder="Enter new password">
+  <label for="confirmPassword">Confirm Password:</label>
+  <input type="password" id="confirmPassword" placeholder="Confirm password">
+  <button onclick="changeUserPassword()">Change Password</button>
+  <p id="settingsMsg"></p>
+</div>
     <div id="welcome" style="display:none;">
       <h2>Welcome, <span id="userName"></span></h2>
       <p>Role: <span id="userRole"></span></p>

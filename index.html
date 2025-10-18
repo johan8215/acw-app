@@ -11,8 +11,9 @@
 <body>
   <div class="container">
 
-    <!-- 🧼 Logo + título -->
+    <!-- 🧼 LOGO / TÍTULO -->
     <h1>ALLSTON CAR WASH</h1>
+    <p id="activeWeek" style="text-align:center; color:#b7c9eb; font-size:14px;">Loading current week...</p>
 
     <!-- 🔐 LOGIN -->
     <div id="login">
@@ -21,35 +22,53 @@
       <button onclick="loginUser()">Sign In</button>
     </div>
 
-    <!-- 👋 WELCOME + SETTINGS -->
+    <!-- 👋 WELCOME -->
     <div id="welcome" style="display:none;">
-  <h2>Welcome, <span id="userName"></span></h2>
-  <p>Role: <span id="userRole"></span></p>
-  
-  <!-- 🔒 BOTÓN DE CERRAR SESIÓN -->
-  <button onclick="logoutUser()" class="logout-btn">Logout</button>
-  
-  <div id="schedule"></div>
-</div>
+      <h2>Welcome, <span id="userName"></span></h2>
+      <p>Role: <span id="userRole"></span></p>
 
-      <!-- ⚙️ BOTÓN PARA ABRIR CONFIGURACIÓN -->
-      <button class="settings-btn" onclick="toggleSettings()">⚙️ Settings</button>
+      <!-- ⚙️ SETTINGS BUTTON (top corner) -->
+      <div style="position:absolute; top:20px; right:25px;">
+        <button onclick="toggleSettings()">⚙️ Settings</button>
+      </div>
 
-      <!-- 🧩 PANEL DE SETTINGS -->
+      <!-- 🔧 SETTINGS PANEL (hidden by default) -->
       <div id="settingsPanel" class="settings-container" style="display:none;">
-        <h3>Change Password</h3>
+        <h3>⚙️ Settings</h3>
+
         <label for="newPassword">New Password:</label>
         <input type="password" id="newPassword" placeholder="Enter new password">
+
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" placeholder="Confirm password">
-        <button onclick="changeUserPassword()">Update Password</button>
+
+        <button onclick="changeUserPassword()">Change Password</button>
+        <button onclick="logoutUser()" style="background:linear-gradient(145deg,#ff4444,#cc0000);margin-top:8px;">Logout</button>
+
         <p id="settingsMsg"></p>
       </div>
 
-      <!-- 🕓 HORARIO -->
+      <!-- 📅 SCHEDULE -->
       <div id="schedule"></div>
     </div>
 
   </div>
+
+  <script>
+    /* ===========================================================
+       🗓️ Mostrar semana activa al cargar login
+       =========================================================== */
+    window.addEventListener("load", async () => {
+      const label = document.getElementById("activeWeek");
+      try {
+        const res = await fetch(`${CONFIG.BASE_URL}?action=getActiveWeek`);
+        const data = await res.json();
+        if (data.week) label.textContent = `📅 Active Week: ${data.week}`;
+        else label.textContent = "No active week found";
+      } catch (err) {
+        label.textContent = "Unable to load week";
+      }
+    });
+  </script>
 </body>
 </html>

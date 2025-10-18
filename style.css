@@ -108,3 +108,79 @@ footer {
   font-size: 13px;
   text-align: center;
 }
+/* =======================================================
+   💎 Background blobs and top info bar
+   ======================================================= */
+
+.background-blobs::before,
+.background-blobs::after {
+  content: "";
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.background-blobs::before {
+  top: -100px;
+  left: -100px;
+  background: #007aff;
+  animation: float1 10s ease-in-out infinite;
+}
+
+.background-blobs::after {
+  bottom: -120px;
+  right: -100px;
+  background: #00c6ff;
+  animation: float2 12s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 20px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-40px, -30px); }
+}
+
+.logo-area {
+  text-align: center;
+}
+
+.logo-box {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #a7c8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-15deg);
+  font-size: 20px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.2);
+}
+
+footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #9cb8ff;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+footer a {
+  color: #9cb8ff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

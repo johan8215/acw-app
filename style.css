@@ -222,3 +222,19 @@ footer {
 #login button {
   width: 100%;
 }
+.logout-btn {
+  margin-top: 10px;
+  background: linear-gradient(145deg, #ff4444, #cc0000);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(145deg, #ff6666, #e60000);
+  transform: scale(1.05);
+}

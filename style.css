@@ -1,69 +1,52 @@
 /* ===========================================================
-   🧼 ACW Connected Blue v3.8 Glass Bright
+   🌌 ACW Floating Blue Orbs Background
    =========================================================== */
 
-#schedule {
-  text-align: center;
-  color: #f7faff;
-  margin-top: 25px;
-  padding: 15px;
+body {
+  background: radial-gradient(circle at 20% 20%, #0d1a42 0%, #000a1c 100%);
+  color: #eaf1ff;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Encabezado */
-#schedule h3, #schedule p {
-  color: #cfe3ff;
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px rgba(0, 120, 255, 0.5);
+/* 🔵 Orb 1 (superior izquierda) */
+body::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -120px;
+  left: -160px;
+  background: radial-gradient(circle, rgba(0,122,255,0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float1 12s ease-in-out infinite alternate;
 }
 
-/* Tabla */
-.schedule-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  font-size: 17px;
-  color: #f7faff;
+/* 🔵 Orb 2 (inferior derecha) */
+body::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  bottom: -140px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(0,180,255,0.25) 0%, transparent 80%);
+  border-radius: 50%;
+  animation: float2 14s ease-in-out infinite alternate-reverse;
 }
 
-.schedule-table th {
-  color: #a9c9ff;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  padding: 10px;
-  letter-spacing: 0.5px;
+@keyframes float1 {
+  from { transform: translateY(0px) scale(1); }
+  to { transform: translateY(-30px) scale(1.05); }
 }
 
-.schedule-table td {
-  padding: 10px;
-  color: #ffffff;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Filas pares con leve fondo brillante */
-.schedule-table tr:nth-child(even) td {
-  background: rgba(255,255,255,0.04);
-  border-radius: 6px;
-}
-
-/* Día OFF */
-.schedule-table td:first-child {
-  color: #bcd3ff;
-  font-weight: 500;
-}
-
-/* Total Hours */
-.total {
-  margin-top: 15px;
-  font-size: 17px;
-  font-weight: 600;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 120, 255, 0.6);
-}
-
-/* Mejor contraste general dentro del contenedor */
-.container {
-  color: #f8faff;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+@keyframes float2 {
+  from { transform: translateY(0px) scale(1); }
+  to { transform: translateY(25px) scale(1.08); }
 }

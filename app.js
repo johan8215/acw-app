@@ -218,3 +218,16 @@ function logoutUser() {
   localStorage.removeItem("acw_email");
   location.reload(); // refresca y vuelve al login
 }
+/* ===========================================================
+   ⚙️ SETTINGS MODAL HANDLERS
+   =========================================================== */
+function openSettings() {
+  document.getElementById("settingsModal").style.display = "block";
+}
+function closeSettings() {
+  document.getElementById("settingsModal").style.display = "none";
+}
+function togglePasswordPanel() {
+  const panel = document.getElementById("passwordPanel");
+  panel.style.display = (panel.style.display === "block") ? "none" : "block";
+}

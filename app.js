@@ -211,3 +211,10 @@ window.addEventListener("load", () => {
     getSchedule(savedEmail);
   }
 });
+/* ===========================================================
+   🚪 LOGOUT USER (cierra sesión limpia)
+   =========================================================== */
+function logoutUser() {
+  localStorage.removeItem("acw_email");
+  location.reload(); // refresca y vuelve al login
+}

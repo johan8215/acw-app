@@ -238,3 +238,33 @@ window.addEventListener("load", () => {
     getSchedule(savedEmail);
   }
 });
+/* ===========================================================
+   ⚙️ SETTINGS MODAL CONTROL
+   =========================================================== */
+function openSettings() {
+  const modal = document.getElementById("settingsModal");
+  if (modal) modal.style.display = "block";
+}
+
+function closeSettings() {
+  const modal = document.getElementById("settingsModal");
+  if (modal) modal.style.display = "none";
+}
+
+function togglePasswordPanel() {
+  const panel = document.getElementById("passwordPanel");
+  if (!panel) return;
+  panel.style.display = (panel.style.display === "none" || panel.style.display === "")
+    ? "block"
+    : "none";
+}
+
+/* ===========================================================
+   🚪 LOGOUT (ubicado dentro del modal)
+   =========================================================== */
+function logoutUser() {
+  localStorage.removeItem("acw_email");
+  document.getElementById("settingsModal").style.display = "none";
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("login").style.display = "block";
+}

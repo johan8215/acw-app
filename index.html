@@ -9,18 +9,6 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <div class="container">
-   
-
-    <div id="welcome" style="display:none;">
-      <h2>Welcome, <span id="userName"></span></h2>
-      <p>Role: <span id="userRole"></span></p>
-      <div id="schedule"></div>
-    </div>
-  </div>
-</body>
-</html>
-<body>
   <div class="background-blobs"></div>
 
   <div id="login" class="login-box">
@@ -29,11 +17,18 @@
       <h1>ALLSTON CAR WASH</h1>
     </div>
 
-    <p class="time">Welcome HRS — <span id="timeNow"></span></p>
+    <p class="active-week">
+      Active week: <span id="activeWeek">Loading...</span>
+    </p>
 
     <input type="email" id="email" placeholder="you@example.com" />
     <input type="password" id="password" placeholder="••••••••" />
     <button onclick="loginUser()">Sign in</button>
+
+    <p class="link-area">
+      <a href="#" onclick="openSettings()">Change Password</a>
+    </p>
+
     <p id="error" class="error"></p>
 
     <footer>

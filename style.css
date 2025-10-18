@@ -1,18 +1,20 @@
 /* ===========================================================
-   ACW — Fondo azul metálico fijo + Glass minimal
+   ACW — Fondo azul metálico fijo + Glass minimal (sin emojis)
    =========================================================== */
 
-/* Fondo azul metálico fijo (sin orbes ni animaciones) */
+/* Fondo azul metálico fijo */
 body {
   background: radial-gradient(1000px 800px at 30% 20%, #0c2b55 0%, #081a33 40%, #071425 70%, #050e1b 100%) fixed,
               linear-gradient(135deg, #0e2a59 0%, #092041 100%) fixed;
   background-blend-mode: overlay, normal;
   color: #eef5ff;
+  margin: 0;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
 }
 
 /* Tarjeta principal tipo glass minimal */
 .container {
-  max-width: 760px;           /* más aire sin verse enorme */
+  max-width: 760px;
   margin: 48px auto;
   padding: 28px 32px;
   background: rgba(255,255,255,0.06);
@@ -29,11 +31,13 @@ body {
 h1, h2, h3 {
   color: #cfe3ff;
   letter-spacing: 0.3px;
+  text-align: center;
 }
 #userRole,
 #schedule p,
 .week-header p {
   color: #b7c9eb;
+  text-align: center;
 }
 
 /* Botones principales (sign in / logout / update) */
@@ -46,6 +50,7 @@ button,
   padding: 11px 16px;
   font-weight: 600;
   transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+  cursor: pointer;
 }
 button:hover,
 .btn:hover {
@@ -70,6 +75,7 @@ input[type="text"] {
   border-radius: 10px;
   padding: 11px 12px;
   outline: none;
+  font-size: 15px;
 }
 input::placeholder { color: #c1d2f3; opacity: .7; }
 input:focus {
@@ -77,7 +83,7 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(47,124,255,.18);
 }
 
-/* Tabla glass y tipografía legible */
+/* Tabla del horario */
 .schedule-table {
   width: 100%;
   margin: 18px 0 6px;
@@ -97,20 +103,15 @@ input:focus {
   color: #eef5ff;
 }
 
-/* Filas alternas con leve relieve */
+/* Filas alternas */
 .schedule-table tr:nth-child(even) td {
   background: rgba(255,255,255,0.03);
   border-radius: 8px;
 }
 
-/* Estado “OFF” y guiones */
-.schedule-table tr td { vertical-align: middle; }
-.schedule-table tr td:nth-child(2) { /* shift col */
-  color: #dfeaff;
-}
-.schedule-table tr[style*="color:#888"] td {  /* OFF */
-  color: #9fb3d8 !important;
-}
+/* Estado "OFF" */
+.schedule-table tr td:nth-child(2) { color: #dfeaff; }
+.schedule-table tr[style*="color:#888"] td { color: #9fb3d8 !important; }
 
 /* Totales */
 .total {
@@ -118,10 +119,9 @@ input:focus {
   font-weight: 600;
   text-align: center;
   margin-top: 10px;
-  opacity: .95;
 }
 
-/* Settings panel (si lo usas) */
+/* Settings panel */
 .settings-container {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
@@ -130,128 +130,9 @@ input:focus {
   margin: 14px 0 20px;
 }
 
-/* Opcional: centra el login en pantallas anchas */
-#login { max-width: 420px; margin: 0 auto; }
-/* 💎 Centrar completamente el Sign In */
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.container {
-  width: 400px;
+/* Centrar login */
+#login { 
+  max-width: 420px; 
+  margin: 0 auto; 
   text-align: center;
-}
-
-/* 🔴 Botón Logout */
-.logout-btn {
-  margin-top: 10px;
-  background: linear-gradient(145deg, #ff4444, #cc0000);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.logout-btn:hover {
-  background: linear-gradient(145deg, #ff6666, #e60000);
-  transform: scale(1.05);
-}
-/* ⚙️ Botón flotante de settings */
-.gear-btn {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #d7e7ff;
-  font-size: 20px;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.gear-btn:hover {
-  background: rgba(255,255,255,0.25);
-  transform: rotate(90deg);
-}
-
-/* 🪟 Ventana flotante (modal) */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
-}
-.modal-content {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 14px;
-  width: 280px;
-  margin: 120px auto;
-  padding: 20px;
-  color: #eef5ff;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.5);
-}
-.close {
-  float: right;
-  font-size: 22px;
-  cursor: pointer;
-  color: #9cb8ff;
-}
-.close:hover { color: #fff; }
-
-.mini-btn {
-  display: block;
-  width: 100%;
-  margin: 6px 0;
-  background: linear-gradient(135deg, #2f7cff, #1762e6);
-  border: none;
-  color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.mini-btn:hover {
-  filter: brightness(1.1);
-}
-/* 🔹 Centrar Login */
-#login {
-  max-width: 420px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-height: 60vh;
-}
-
-/* 🔹 Botón de Logout */
-.logout-btn {
-  margin: 12px 0 18px;
-  background: linear-gradient(145deg, #ff4444, #cc0000);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: #fff;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-.logout-btn:hover {
-  background: linear-gradient(145deg, #ff6666, #e60000);
-  transform: scale(1.05);
 }

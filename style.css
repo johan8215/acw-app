@@ -374,3 +374,80 @@ button:hover {
     padding: 10px;
   }
 }
+/* ===========================================================
+   🔻 HUD EN ESQUINAS – LETRAS ROJAS
+   =========================================================== */
+.hud {
+  position: fixed;
+  font-size: 13px;
+  color: #ff4d4d; /* 🔴 rojo elegante */
+  opacity: 0.9;
+  z-index: 50;
+  text-shadow: 0 0 4px rgba(255, 0, 0, 0.4);
+  transition: 0.3s ease;
+}
+.hud a {
+  color: #ff6666;
+  text-decoration: none;
+}
+.hud a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* 📍 Posiciones */
+.bottom-left {
+  bottom: 12px;
+  left: 16px;
+}
+.bottom-left-mid {
+  bottom: 12px;
+  left: 220px;
+}
+.bottom-right-mid {
+  bottom: 12px;
+  right: 240px;
+  text-align: right;
+}
+.bottom-right {
+  bottom: 12px;
+  right: 16px;
+  text-align: right;
+}
+
+/* 💡 Hover efecto */
+.hud:hover {
+  opacity: 1;
+  text-shadow: 0 0 6px rgba(255, 60, 60, 0.8);
+}
+
+/* ⚙️ Botón flotante */
+.gear-btn {
+  position: fixed;
+  bottom: 65px;
+  right: 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 22px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+  transition: all 0.25s ease;
+}
+.gear-btn:hover {
+  background: rgba(255, 0, 0, 0.25);
+  transform: rotate(90deg);
+}
+
+/* 📱 Ajuste móvil */
+@media (max-width: 700px) {
+  .hud {
+    font-size: 12px;
+  }
+  .bottom-left-mid { left: 120px; }
+  .bottom-right-mid { right: 120px; }
+}

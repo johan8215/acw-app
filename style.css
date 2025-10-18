@@ -184,3 +184,17 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+.link-area {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.link-area a {
+  color: #7ab8ff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.link-area a:hover {
+  text-decoration: underline;
+}

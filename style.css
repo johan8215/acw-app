@@ -255,3 +255,68 @@ body {
   background: linear-gradient(145deg, #ff6666, #e60000);
   transform: scale(1.05);
 }
+#settings {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 420px;
+  margin: 30px auto;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+}
+
+#settings h2 {
+  color: #d5e7ff;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.password-change input {
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  color: #eef5ff;
+  font-size: 15px;
+}
+
+.password-change button,
+.logoutBtn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #264b80;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.password-change button:hover,
+.logoutBtn:hover {
+  background: #366ac0;
+}
+
+.app-info {
+  text-align: center;
+  margin-top: 20px;
+  color: #bcd4ff;
+  font-size: 14px;
+  line-height: 1.4em;
+}
+.app-info a {
+  color: #bcd4ff;
+  text-decoration: none;
+}
+.app-info a:hover {
+  text-decoration: underline;
+}
+.app-info .powered {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #88a6d9;
+}

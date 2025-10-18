@@ -50,3 +50,51 @@ body::after {
   from { transform: translateY(0px) scale(1); }
   to { transform: translateY(25px) scale(1.08); }
 }
+/* ===========================================================
+   ✨ ACW Text Contrast Fix (Bright White)
+   =========================================================== */
+
+/* Texto general */
+body, h1, h2, h3, h4, h5, h6, p, span, td, th, label {
+  color: #f5f8ff !important;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Encabezados principales */
+h1, h2 {
+  color: #bcd9ff !important;
+}
+
+/* Texto de las tablas */
+.schedule-table th,
+.schedule-table td {
+  color: #ffffff !important;
+}
+
+/* Total hours y etiquetas */
+.total {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Inputs y placeholders */
+input[type="email"],
+input[type="password"],
+input,
+button {
+  color: #ffffff !important;
+}
+
+/* Enlaces */
+a {
+  color: #7ab8ff !important;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Para asegurar contraste en login */
+.container {
+  color: #f5f8ff !important;
+}

@@ -314,3 +314,21 @@ button:hover {
   .bottom-left-mid { left: 120px; }
   .bottom-right-mid { right: 120px; }
 }
+/* ===========================================================
+   ✨ EFECTO NEÓN RESPIRANTE (para el HUD rojo)
+   =========================================================== */
+@keyframes redPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px rgba(255, 60, 60, 0.6),
+                 0 0 12px rgba(255, 60, 60, 0.4);
+    opacity: 0.9;
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 100, 100, 0.9),
+                 0 0 20px rgba(255, 0, 0, 0.6);
+    opacity: 1;
+  }
+}
+.hud {
+  animation: redPulse 3.5s ease-in-out infinite;
+}

@@ -142,3 +142,10 @@ async function changeUserPassword() {
     msg.style.color = "#ff6666";
   }
 }
+/* ===========================================================
+   Toggle Settings Panel
+   =========================================================== */
+function toggleSettings() {
+  const panel = document.getElementById('settingsPanel');
+  panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+}

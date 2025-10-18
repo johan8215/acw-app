@@ -200,3 +200,14 @@ function toggleSettings() {
   const panel = document.getElementById('settingsPanel');
   panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
 }
+/* ===========================================================
+   🔁 AUTO-LOGIN (mantiene la sesión activa)
+   =========================================================== */
+window.addEventListener("load", () => {
+  const savedEmail = localStorage.getItem("acw_email");
+  if (savedEmail) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+    getSchedule(savedEmail);
+  }
+});

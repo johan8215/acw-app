@@ -18,12 +18,16 @@ async function loginUser() {
     const data = await res.json();
 
     if (data.ok) {
+      // ✅ Guarda el email del usuario para usarlo luego en "changeUserPassword()"
+      localStorage.setItem("acw_email", email);
+
+      // 👇 Aquí continúa tu código normal
       document.getElementById("login").style.display = "none";
       document.getElementById("welcome").style.display = "block";
       document.getElementById("userName").textContent = data.name;
       document.getElementById("userRole").textContent = data.role;
 
-      // 👇 Nueva llamada con email real (ya autenticado)
+      // Llama al horario del usuario logueado
       getSchedule(email);
     } else {
       alert("Invalid credentials");

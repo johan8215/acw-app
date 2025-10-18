@@ -10,19 +10,28 @@
 </head>
 <body>
   <div class="container">
-  <h1>ALLSTON CAR WASH</h1>
+    <h1>ALLSTON CAR WASH</h1>
 
-  <!-- 🔑 LOGIN -->
-  <div id="login">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="loginUser()">Sign In</button>
+    <!-- LOGIN -->
+    <div id="login">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="loginUser()">Sign In</button>
+    </div>
+
+    <!-- WELCOME AREA -->
+    <div id="welcome" style="display:none;">
+      <h2>Welcome, <span id="userName"></span></h2>
+      <p>Role: <span id="userRole"></span></p>
+
+      <!-- 🔒 Logout centrado -->
+      <button onclick="logoutUser()" class="logout-btn">Logout</button>
+
+      <div id="schedule"></div>
+    </div>
   </div>
-
-  <!-- ✅ WELCOME VIEW -->
-  <div id="welcome" style="display:none;">
-    <h2>Welcome, <span id="userName"></span></h2>
-    <p>Role: <span id="userRole"></span></p>
+</body>
+</html>
 
     <!-- ⚙️ BOTÓN DE CONFIGURACIÓN -->
     <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>

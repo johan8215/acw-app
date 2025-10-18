@@ -193,3 +193,8 @@ footer {
 .settings-container button:hover {
   transform: scale(1.03);
 }
+.activeTimer {
+  color: #7df9ff;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(0,180,255,0.6);
+}

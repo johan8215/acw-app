@@ -207,7 +207,7 @@ function showManagerPanel(list) {
       <td><button onclick='openEmployee(${JSON.stringify(emp)})'>Open</button></td></tr>`;
   });
   html += "</tbody></table>";
-  document.getElementById("schedule").insertAdjacentHTML("beforeend", html);
+  document.getElementById("schedule").insertAdjacentHTML("beforeend", "<br><br>" + html);
 }
 
 /* ===========================================================
@@ -234,7 +234,10 @@ window.addEventListener("load", async () => {
     const data = await res.json();
 
     if (data.ok) {
-      document.getElementById("userName").textContent = data.name;
+      const displayName = data.name && data.name.trim() !== "" 
+  ? data.name 
+  : savedEmail.split("@")[0].toUpperCase();
+document.getElementById("userName").textContent = displayName;
       document.getElementById("userRole").textContent = data.role;
 
       if (["manager", "supervisor", "owner"].includes((data.role || "").toLowerCase().trim())) {

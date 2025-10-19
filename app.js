@@ -214,3 +214,31 @@ function logoutUser() {
   localStorage.removeItem("acw_email");
   location.reload();
 }
+/* ===========================================================
+   🔁 AUTO-LOGIN (mantiene la sesión después de recargar)
+   =========================================================== */
+window.addEventListener("load", async () => {
+  const savedEmail = localStorage.getItem("acw_email");
+  if (savedEmail) {
+    try {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("welcome").style.display = "block";
+      await getSchedule(savedEmail);
+
+      // 🚀 Cargar info del usuario (para mostrar nombre y rol)
+      const res = await fetch(`${CONFIG.BASE_URL}?action=getUser&email=${encodeURIComponent(savedEmail)}`);
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById("userName").textContent = data.name;
+        document.getElementById("userRole").textContent = data.role;
+
+        // Si es manager o supervisor → muestra el panel
+        if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
+          showManagerPanel(data.team || []);
+        }
+      }
+    } catch (err) {
+      console.error("Auto-login error:", err);
+    }
+  }
+});

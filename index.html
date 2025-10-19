@@ -1,70 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allston Car Wash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ACW App</title>
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon-acw.png" />
+  <link rel="icon" type="image/png" href="assets/icon-acw.png" />
+
   <link rel="stylesheet" href="style.css" />
   <script src="config.js"></script>
-  <script src="app.js"></script>
+  <script defer src="app.js"></script>
 </head>
+
 <body>
-  <!-- 🧱 CONTENEDOR PRINCIPAL -->
+  <!-- HUD ROJO – ESQUINAS -->
+  <div class="hud bottom-left">🌐 <a href="https://allstoncarwash.com" target="_blank">allstoncarwash.com</a></div>
+  <div class="hud bottom-left-mid">📞 (617) 254-3200</div>
+  <div class="hud bottom-right-mid">⚙️ ACW-App v4.0 Smart iOS</div>
+  <div class="hud bottom-right">Powered by <b>JAG15</b> | Allston Car Wash © 2025</div>
+
+  <!-- BOTONES SUPERIORES -->
+  <div class="top-actions">
+    <button id="langBtn" class="pill-btn" aria-label="Language">🌐 EN</button>
+    <button id="themeBtn" class="pill-btn" aria-label="Theme">🌙</button>
+    <button id="gearButton" class="pill-btn" aria-label="Settings">⚙️</button>
+  </div>
+
+  <!-- CONTENEDOR GLASS -->
   <div class="container">
-    <h1>ALLSTON CAR WASH</h1>
+
+    <!-- LOGO (GIF opcional) -->
+    <div class="acw-logo">
+      <img src="assets/logo3d.gif" alt="ACW" class="logo-gif" />
+      <h1 class="brand">ALLSTON CAR WASH</h1>
+      <p class="brand-sub">Since 1968</p>
+    </div>
 
     <!-- LOGIN -->
-    <div id="login">
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button onclick="loginUser()">Sign In</button>
-    </div>
+    <section id="login">
+      <h2 data-i18n="sign_in">Sign In</h2>
+      <input type="email" id="email" placeholder="Email" autocomplete="username" />
+      <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+      <button class="btn" id="btnSignIn" data-i18n="sign_in_btn">Sign In</button>
+      <p id="activeWeek" class="muted small"></p>
+    </section>
 
     <!-- WELCOME -->
-    <div id="welcome" style="display:none;">
-      <h2>Welcome, <span id="userName"></span></h2>
-      <p>Role: <b><span id="userRole">—</span></b></p>
+    <section id="welcome" style="display:none;">
+      <div class="welcome-head">
+        <div>
+          <h2 data-i18n="welcome">Welcome</h2>
+          <p class="muted"><span data-i18n="user">User</span>: <b id="userName">—</b></p>
+          <p class="muted"><span data-i18n="role">Role</span>: <b id="userRole">—</b></p>
+        </div>
+        <div>
+          <button class="btn ghost" id="btnOpenManager" style="display:none;">🧭 Manager</button>
+        </div>
+      </div>
+
       <div id="schedule"></div>
-    </div>
-  </div> <!-- ✅ AQUÍ cerramos correctamente el contenedor -->
 
-    <!-- ⚙️ BOTÓN FLOTANTE -->
-  <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
+      <div class="actions-row">
+        <button class="btn ghost" id="btnSettings" data-i18n="settings">Settings</button>
+        <button class="btn danger" id="btnLogout" data-i18n="logout">Log Out</button>
+      </div>
+    </section>
 
-  <!-- 🌐 INFORMACIÓN EN ESQUINAS (afuera del contenedor) -->
-  <div class="hud bottom-left">
-    🌐 <a href="https://allstoncarwash.com" target="_blank">allstoncarwash.com</a>
-  </div>
-
-  <div class="hud bottom-left-mid">
-    📞 (617) 254-3200
-  </div>
-
-  <div class="hud bottom-right-mid">
-    ⚙️ ACW-App v3.8 Connected Stable
-  </div>
-
-  <div class="hud bottom-right">
-    Powered by <b>JAG15</b> | Allston Car Wash © 2025
-  </div>
-
-  <!-- 🧩 SETTINGS MODAL -->
-  <div id="settingsModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeSettings()">&times;</span>
-      <h3>⚙️ Settings</h3>
-      <hr />
-      <button class="mini-btn" onclick="togglePasswordPanel()">Change Password</button>
-      <button class="mini-btn logoutBtn" onclick="logoutUser()">🚪 Log Out</button>
-
-      <!-- 🔒 Change Password Panel -->
-      <div id="passwordPanel" style="display:none; margin-top:10px;">
-        <input type="password" id="newPassword" placeholder="New password" />
-        <input type="password" id="confirmPassword" placeholder="Confirm password" />
-        <button class="mini-btn" onclick="changeUserPassword()">Save</button>
-        <p id="settingsMsg"></p>
+    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="close" id="closeSettings" aria-label="Close">×</button>
+        <h3>⚙️ <span data-i18n="settings">Settings</span></h3>
+        <hr />
+        <div class="settings-grid">
+          <div>
+            <h4 data-i18n="change_password">Change Password</h4>
+            <input type="password" id="newPassword" placeholder="New password" />
+            <input type="password" id="confirmPassword" placeholder="Confirm password" />
+            <button class="mini-btn" id="btnChangePass" data-i18n="save">Save</button>
+            <p id="settingsMsg" class="muted small"></p>
+          </div>
+          <div>
+            <h4 data-i18n="appearance">Appearance</h4>
+            <div class="row-gap">
+              <button class="mini-btn" id="btnDay" data-i18n="day_mode">Day Mode</button>
+              <button class="mini-btn" id="btnNight" data-i18n="night_mode">Night Mode</button>
+              <button class="mini-btn" id="btnAuto" data-i18n="auto_mode">Auto</button>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="app-info">
+          <p>🌐 <a href="https://allstoncarwash.com" target="_blank">allstoncarwash.com</a></p>
+          <p>📞 (617) 254-3200</p>
+          <p>⚙️ ACW-App v4.0 Smart iOS</p>
+          <p class="powered">Powered by <b>JAG15</b> | Allston Car Wash © 2025</p>
+        </div>
       </div>
     </div>
+
+    <!-- MANAGER PANEL (Beta sin tocar backend) -->
+    <section id="managerPanel" style="display:none;">
+      <div class="panel-head">
+        <h3>🧭 Manager Panel</h3>
+        <p class="muted small" data-i18n="manager_hint">
+          Load an employee by short name, edit shifts, and (optionally) send to Sheets if your backend supports it.
+        </p>
+      </div>
+
+      <div class="mgr-search">
+        <input id="mgrSearch" type="text" placeholder="e.g. j. giraldo" />
+        <button class="btn" id="btnMgrLoad" data-i18n="load">Load</button>
+      </div>
+
+      <div id="mgrResult"></div>
+
+      <div class="mgr-actions">
+        <button class="btn" id="btnMgrExport" data-i18n="export_changes">Export Changes (JSON)</button>
+        <button class="btn" id="btnMgrSave" data-i18n="save_to_sheets">Save to Sheets (beta)</button>
+        <span class="muted small" id="mgrMsg"></span>
+      </div>
+    </section>
   </div>
+
+  <!-- Registro del SW -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+      });
+    }
+  </script>
 </body>
 </html>

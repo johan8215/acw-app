@@ -54,9 +54,14 @@ async function loginUser() {
       getSchedule(email);
 
       // Si es manager o supervisor → activa panel
-      if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
-        showManagerPanel(data.team || []);
-      }
+     if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
+  const teamDemo = [
+    { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
+    { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },
+    { name: "Luis", shift: "OFF", hours: 0, phone: "16174443322" },
+  ];
+  showManagerPanel(teamDemo);
+}
 
     } else alert("Invalid credentials");
   } catch (err) {

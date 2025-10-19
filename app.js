@@ -237,7 +237,7 @@ window.addEventListener("load", async () => {
       document.getElementById("userName").textContent = data.name;
       document.getElementById("userRole").textContent = data.role;
 
-      if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
+      if (["manager", "supervisor", "owner"].includes((data.role || "").toLowerCase().trim())) {
         const teamList = data.team && data.team.length ? data.team : [
           { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
           { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },

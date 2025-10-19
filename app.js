@@ -47,7 +47,10 @@ async function loginUser() {
     if (data.ok) {
       document.getElementById("login").style.display = "none";
       document.getElementById("welcome").style.display = "block";
-      document.getElementById("userName").textContent = data.name;
+      const displayName = data.name && data.name.trim() !== "" 
+  ? data.name 
+  : email.split("@")[0].toUpperCase();
+document.getElementById("userName").textContent = displayName;
       document.getElementById("userRole").textContent = data.role;
       localStorage.setItem("acw_email", email);
       await getSchedule(email);

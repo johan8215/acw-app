@@ -336,3 +336,8 @@ button:hover {
 .hud {
   animation: redPulse 3.5s ease-in-out infinite;
 }
+@media (max-width: 600px) {
+  .bottom-left-mid { left: 50%; transform: translateX(-50%); bottom: 38px; }
+  .bottom-right-mid { display: none; } /* oculta el texto de versión si se enciman */
+  .bottom-right { bottom: 8px; font-size: 11.5px; }
+}

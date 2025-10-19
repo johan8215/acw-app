@@ -258,34 +258,60 @@ button:hover {
   text-decoration: underline;
 }
 
-/* 📍 Posiciones ajustadas para 4 esquinas visibles */
+/* 📍 Posiciones ajustadas — 4 esquinas visibles y balanceadas */
 .bottom-left {
   position: fixed;
-  bottom: 12px;
-  left: 20px;
+  bottom: 14px;
+  left: 24px;
 }
 
 .bottom-left-mid {
   position: fixed;
-  bottom: 12px;
-  left: 33%;
-  transform: translateX(-50%);
+  bottom: 14px;
+  left: 25%;
   text-align: center;
+  transform: translateX(-50%);
 }
 
 .bottom-right-mid {
   position: fixed;
-  bottom: 12px;
-  right: 33%;
-  transform: translateX(50%);
+  bottom: 14px;
+  right: 25%;
   text-align: center;
+  transform: translateX(50%);
 }
 
 .bottom-right {
   position: fixed;
-  bottom: 12px;
-  right: 20px;
+  bottom: 14px;
+  right: 24px;
   text-align: right;
+}
+
+/* Asegura que el texto no se sobreponga en pantallas medianas */
+@media (max-width: 900px) {
+  .bottom-left-mid { left: 30%; }
+  .bottom-right-mid { right: 30%; }
+}
+
+/* 📱 Ajuste móvil */
+@media (max-width: 600px) {
+  .bottom-left {
+    left: 50%;
+    bottom: 42px;
+    transform: translateX(-50%);
+  }
+  .bottom-left-mid,
+  .bottom-right-mid {
+    display: none;
+  }
+  .bottom-right {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11.5px;
+    text-align: center;
+  }
 }
 
 /* ⚙️ Botón flotante */

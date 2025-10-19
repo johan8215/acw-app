@@ -1,369 +1,227 @@
 /*********************************************************
- *  ALLSTON CAR WASH – ACW-App (v3.8 Connected Stable)
- *  Author: Johan A. Giraldo (JAG) & Sky (AI Assistant)
+ *  ACW-App v4.0 – Smart iOS Glass (EN/ES, Day/Night)
  *********************************************************/
 
-/* ===========================================================
-   🟦 FONDO AZUL METÁLICO + GLASS EFFECT
-   =========================================================== */
+/* ========= THEME TOKENS ========= */
+:root {
+  --bg: #f6f8fb;
+  --text: #0f172a;
+  --muted: #61708a;
+  --glass: rgba(255,255,255,0.7);
+  --glass-border: rgba(10, 30, 70, 0.08);
+  --accent: #007aff;          /* iOS blue */
+  --danger: #ff3b30;          /* iOS red */
+  --shadow: 0 20px 45px rgba(0,0,0,.08);
+}
+.theme-night {
+  --bg: #0b1324;
+  --text: #eaf2ff;
+  --muted: #9fb3d8;
+  --glass: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+  --accent: #52a3ff;
+  --danger: #ff6262;
+  --shadow: 0 20px 45px rgba(0,0,0,.45);
+}
+
+/* ========= GLOBAL ========= */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
   margin: 0;
-  height: 100vh;
+  background:
+    radial-gradient(1000px 800px at 30% 20%, #a8c7ff22 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* center container */
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+/* ========= TOP ACTIONS ========= */
+.top-actions {
+  position: fixed;
+  top: 16px;
+  right: 16px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(1000px 800px at 30% 20%, #0c2b55 0%, #081a33 40%, #071425 70%, #050e1b 100%) fixed,
-              linear-gradient(135deg, #0e2a59 0%, #092041 100%) fixed;
-  background-blend-mode: overlay, normal;
-  color: #eef5ff;
-  font-family: "SF Pro Display", "Segoe UI", sans-serif;
+  gap: 8px;
+  z-index: 50;
 }
-
-/* ===========================================================
-   🧱 CONTENEDOR PRINCIPAL
-   =========================================================== */
-.container {
-  width: 400px;
-  text-align: center;
-  padding: 28px 32px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-/* ===========================================================
-   🧩 LOGIN Y WELCOME
-   =========================================================== */
-h1, h2, h3 {
-  color: #cfe3ff;
-  letter-spacing: 0.3px;
-  margin-bottom: 8px;
-}
-
-#login {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
-}
-input[type="email"], input[type="password"] {
-  width: 100%;
-  color: #eaf2ff;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.16);
-  border-radius: 10px;
-  padding: 11px 12px;
-  outline: none;
-}
-input::placeholder { color: #c1d2f3; opacity: .7; }
-input:focus {
-  border-color: #5fa0ff;
-  box-shadow: 0 0 0 3px rgba(47,124,255,.18);
-}
-
-button {
-  background: linear-gradient(135deg, #2f7cff 0%, #1762e6 50%, #0f4cc7 100%);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: #fff;
-  border-radius: 10px;
-  padding: 11px 16px;
+.pill-btn {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 999px;
   font-weight: 600;
-  transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+  backdrop-filter: blur(8px);
   cursor: pointer;
 }
-button:hover {
-  filter: brightness(1.06);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(23, 98, 230, .35);
+.pill-btn:hover { filter: brightness(1.03); }
+
+/* ========= CONTAINER ========= */
+.container {
+  width: min(820px, 92vw);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  padding: 28px 28px 20px;
 }
 
-/* ===========================================================
-   📅 TABLA DE HORARIO
-   =========================================================== */
+/* ========= BRAND / LOGO ========= */
+.acw-logo { text-align: center; margin-bottom: 8px; }
+.logo-gif {
+  width: 92px; height: 92px; object-fit: contain;
+  border-radius: 20px;
+  box-shadow: 0 6px 30px rgba(255,0,0,.25);
+}
+.brand { margin: 10px 0 0; letter-spacing: .6px; }
+.brand-sub { margin: 2px 0 14px; color: var(--muted); }
+
+/* ========= FORMS / BUTTONS ========= */
+input[type="email"], input[type="password"], input[type="text"] {
+  width: 100%;
+  color: var(--text);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+}
+.theme-night input { background: rgba(255,255,255,0.08); color: var(--text); }
+input::placeholder { color: var(--muted); }
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+
+.btn {
+  background: linear-gradient(135deg, var(--accent), #0f4cc7);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(23,98,230,.25);
+}
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); box-shadow: none; }
+.btn.ghost {
+  background: transparent; color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+}
+.btn.danger {
+  background: linear-gradient(135deg, var(--danger), #b81414);
+  box-shadow: 0 8px 18px rgba(255,59,48,.25);
+  border-color: color-mix(in oklab, var(--danger) 30%, transparent);
+}
+.mini-btn {
+  background: color-mix(in oklab, var(--accent) 75%, #2563eb);
+  color: #fff;
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ========= TYPO ========= */
+h1, h2, h3, h4 { color: var(--text); margin: 0 0 10px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.row-gap { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ========= LAYOUTS ========= */
+.welcome-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 6px;
+}
+.actions-row { display: flex; gap: 10px; margin-top: 10px; }
+
+/* ========= TABLE (SCHEDULE) ========= */
 .schedule-table {
   width: 100%;
-  margin: 18px 0 6px;
   border-collapse: collapse;
-  color: #eef5ff;
+  margin: 14px 0 6px;
+  color: var(--text);
 }
 .schedule-table th {
   text-align: left;
-  font-weight: 700;
-  color: #d7e7ff;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  font-weight: 800;
+  border-bottom: 1px solid var(--glass-border);
   padding: 10px;
 }
 .schedule-table td {
   padding: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid color-mix(in oklab, var(--glass-border) 70%, transparent);
 }
-.schedule-table tr:nth-child(even) td {
-  background: rgba(255,255,255,0.03);
-  border-radius: 8px;
-}
-.total {
-  color: #d7e7ff;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 10px;
-  opacity: .95;
-}
+.schedule-table tr:nth-child(even) td { background: rgba(0,0,0,.03); }
+.theme-night .schedule-table tr:nth-child(even) td { background: rgba(255,255,255,.03); }
+.total { font-weight: 700; text-align: center; margin-top: 8px; }
 
-/* ===========================================================
-   ⚙️ BOTÓN FLOTANTE SETTINGS
-   =========================================================== */
-.gear-btn {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  background: rgba(255,255,255,0.08);
-  color: #eaf1ff;
-  font-size: 24px;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 25px rgba(0,0,0,0.4);
-  transition: all 0.25s ease;
-}
-.gear-btn:hover {
-  background: rgba(255,255,255,0.2);
-  transform: rotate(90deg);
-}
-
-/* ===========================================================
-   🪟 MODAL SETTINGS (GLASS + ANIMACIÓN SLIDE-UP)
-   =========================================================== */
+/* ========= MODAL ========= */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(6px);
-  animation: fadeIn 0.4s ease forwards;
+  display: none; position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
 }
 .modal-content {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 14px;
-  margin: 10% auto;
-  padding: 24px;
-  max-width: 420px;
-  color: #eaf1ff;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.4);
-  animation: slideUp 0.4s ease;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  width: min(640px, 92vw);
+  margin: 8vh auto;
+  padding: 20px;
+  color: var(--text);
+  box-shadow: var(--shadow);
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; } to { opacity: 1; }
-}
-@keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
 .close {
-  float: right;
-  font-size: 22px;
-  cursor: pointer;
-  color: #bcd4ff;
+  float: right; font-size: 22px; color: var(--muted); background: transparent;
+  border: 0; cursor: pointer;
 }
-.close:hover { color: #fff; }
+.close:hover { color: var(--text); }
+.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 720px){ .settings-grid{ grid-template-columns: 1fr; } }
 
-/* ===========================================================
-   🔘 BOTONES MINI (CHANGE / LOGOUT)
-   =========================================================== */
-.mini-btn, .logoutBtn {
-  width: 100%;
-  margin: 6px 0;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #2f7cff, #1762e6);
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-}
-.mini-btn:hover, .logoutBtn:hover {
-  background: linear-gradient(135deg, #3e8fff, #1e6ef2);
-  transform: translateY(-1px);
-}
+/* ========= MANAGER PANEL ========= */
+#managerPanel { margin-top: 14px; }
+.panel-head { display: flex; align-items: baseline; justify-content: space-between; }
+.mgr-search { display: flex; gap: 8px; margin: 10px 0; }
+.mgr-actions { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
 
-/* ===========================================================
-   ℹ️ INFO FOOTER (POWERED BY JAG15)
-   =========================================================== */
-.app-info {
-  text-align: center;
-  margin-top: 20px;
-  color: #bcd4ff;
-  font-size: 14px;
-  line-height: 1.4em;
-}
-.app-info a {
-  color: #bcd4ff;
-  text-decoration: none;
-}
-.app-info a:hover {
-  text-decoration: underline;
-}
-.powered {
-  margin-top: 6px;
-  font-size: 13px;
-  color: #88a6d9;
-}
-/* 🌐 Enlace del website en esquina inferior */
-.corner-link {
-  position: absolute;
-  bottom: 10px;
-  right: 16px;
-  font-size: 13px;
-  color: #a8c7ff;
-  text-decoration: none;
-  opacity: 0.8;
-  transition: 0.25s ease;
-}
-.corner-link:hover {
-  color: #ffffff;
-  opacity: 1;
-  text-decoration: underline;
-}
-/* ===========================================================
-   🔻 HUD EN ESQUINAS – LETRAS ROJAS
-   =========================================================== */
+/* ========= HUD ROJO – ESQUINAS ========= */
 .hud {
   position: fixed;
   font-size: 13px;
-  color: #ff4d4d; /* 🔴 rojo elegante */
-  opacity: 0.9;
-  z-index: 50;
-  text-shadow: 0 0 4px rgba(255, 0, 0, 0.4);
-  transition: 0.3s ease;
+  color: #ff4d4d;
+  z-index: 60;
+  text-shadow: 0 0 6px rgba(255, 60, 60, .6), 0 0 12px rgba(255,0,0,.35);
+  animation: redPulse 3.5s ease-in-out infinite;
 }
-.hud a {
-  color: #ff6666;
-  text-decoration: none;
-}
-.hud a:hover {
-  color: #ffffff;
-  text-decoration: underline;
-}
-
-/* 📍 Posiciones ajustadas — 4 esquinas visibles y balanceadas */
-.bottom-left {
-  position: fixed;
-  bottom: 14px;
-  left: 24px;
+.hud a { color: #ff6868; text-decoration: none; }
+.hud a:hover { color: #fff; text-decoration: underline; }
+.bottom-left { bottom: 14px; left: 20px; }
+.bottom-left-mid { bottom: 14px; left: 25%; transform: translateX(-50%); text-align: center; }
+.bottom-right-mid { bottom: 14px; right: 25%; transform: translateX(50%); text-align: center; }
+.bottom-right { bottom: 14px; right: 20px; text-align: right; }
+@keyframes redPulse {
+  0%,100% { opacity: .9; } 50% { opacity: 1; }
 }
 
-.bottom-left-mid {
-  position: fixed;
-  bottom: 14px;
-  left: 25%;
-  text-align: center;
-  transform: translateX(-50%);
-}
-
-.bottom-right-mid {
-  position: fixed;
-  bottom: 14px;
-  right: 25%;
-  text-align: center;
-  transform: translateX(50%);
-}
-
-.bottom-right {
-  position: fixed;
-  bottom: 14px;
-  right: 24px;
-  text-align: right;
-}
-
-/* Asegura que el texto no se sobreponga en pantallas medianas */
-@media (max-width: 900px) {
+/* ========= RESPONSIVE ========= */
+@media (max-width: 900px){
   .bottom-left-mid { left: 30%; }
   .bottom-right-mid { right: 30%; }
 }
-
-/* 📱 Ajuste móvil */
-@media (max-width: 600px) {
-  .bottom-left {
-    left: 50%;
-    bottom: 42px;
-    transform: translateX(-50%);
-  }
-  .bottom-left-mid,
-  .bottom-right-mid {
-    display: none;
-  }
-  .bottom-right {
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 11.5px;
-    text-align: center;
-  }
-}
-
-/* ⚙️ Botón flotante */
-.gear-btn {
-  position: fixed;
-  bottom: 65px;
-  right: 20px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.25);
-  color: #fff;
-  font-size: 22px;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 25px rgba(0,0,0,0.4);
-  transition: all 0.25s ease;
-}
-.gear-btn:hover {
-  background: rgba(255, 0, 0, 0.25);
-  transform: rotate(90deg);
-}
-
-/* 📱 Ajuste móvil */
-@media (max-width: 700px) {
-  .hud {
-    font-size: 12px;
-  }
-  .bottom-left-mid { left: 120px; }
-  .bottom-right-mid { right: 120px; }
-}
-/* ===========================================================
-   ✨ EFECTO NEÓN RESPIRANTE (para el HUD rojo)
-   =========================================================== */
-@keyframes redPulse {
-  0%, 100% {
-    text-shadow: 0 0 6px rgba(255, 60, 60, 0.6),
-                 0 0 12px rgba(255, 60, 60, 0.4);
-    opacity: 0.9;
-  }
-  50% {
-    text-shadow: 0 0 10px rgba(255, 100, 100, 0.9),
-                 0 0 20px rgba(255, 0, 0, 0.6);
-    opacity: 1;
-  }
-}
-.hud {
-  animation: redPulse 3.5s ease-in-out infinite;
-}
-@media (max-width: 600px) {
-  .bottom-left-mid { left: 50%; transform: translateX(-50%); bottom: 38px; }
-  .bottom-right-mid { display: none; } /* oculta el texto de versión si se enciman */
-  .bottom-right { bottom: 8px; font-size: 11.5px; }
+@media (max-width: 640px){
+  .bottom-left { left: 50%; bottom: 42px; transform: translateX(-50%); }
+  .bottom-left-mid, .bottom-right-mid { display: none; }
+  .bottom-right { left: 50%; bottom: 10px; right: auto; transform: translateX(-50%); text-align: center; }
 }

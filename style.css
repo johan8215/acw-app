@@ -258,7 +258,6 @@ button:hover {
   text-decoration: underline;
 }
 
-/* 📍 Posiciones */
 /* 📍 Posiciones ajustadas para 4 esquinas visibles */
 .bottom-left {
   position: fixed;
@@ -287,30 +286,6 @@ button:hover {
   bottom: 12px;
   right: 20px;
   text-align: right;
-}
-.bottom-left {
-  bottom: 12px;
-  left: 16px;
-}
-.bottom-left-mid {
-  bottom: 12px;
-  left: 220px;
-}
-.bottom-right-mid {
-  bottom: 12px;
-  right: 240px;
-  text-align: right;
-}
-.bottom-right {
-  bottom: 12px;
-  right: 16px;
-  text-align: right;
-}
-
-/* 💡 Hover efecto */
-.hud:hover {
-  opacity: 1;
-  text-shadow: 0 0 6px rgba(255, 60, 60, 0.8);
 }
 
 /* ⚙️ Botón flotante */

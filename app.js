@@ -239,12 +239,13 @@ window.addEventListener("load", async () => {
 
         // Si es manager o supervisor → muestra el panel
         if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
-          showManagerPanel(data.team || []);
-        }
-      }
-    } catch (err) {
-      console.error("Auto-login error:", err);
-    }
+  const teamList = data.team && data.team.length ? data.team : [
+    { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
+    { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },
+    { name: "Luis", shift: "OFF", hours: 0, phone: "16174443322" },
+  ];
+  showManagerPanel(teamList);
+}
   }
   /* ===========================================================
    ⚙️ SETTINGS CONTROL (abre / cierra el modal)

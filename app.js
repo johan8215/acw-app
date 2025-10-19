@@ -246,4 +246,17 @@ window.addEventListener("load", async () => {
       console.error("Auto-login error:", err);
     }
   }
+  /* ===========================================================
+   ⚙️ SETTINGS CONTROL (abre / cierra el modal)
+   =========================================================== */
+function openSettings() {
+  document.getElementById("settingsModal").style.display = "block";
+}
+function closeSettings() {
+  document.getElementById("settingsModal").style.display = "none";
+}
+function togglePasswordPanel() {
+  const p = document.getElementById("passwordPanel");
+  p.style.display = p.style.display === "none" ? "block" : "none";
+}
 });

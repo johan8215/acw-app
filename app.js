@@ -32,12 +32,11 @@ const TXT = {
 }[LANG];
 
 /* ===========================================================
-   LOGIN + SCHEDULE (funciona igual que v3.8)
+   LOGIN + SCHEDULE
    =========================================================== */
 async function loginUser() {
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
-
   if (!email || !password) return alert("Please enter your email and password");
 
   try {
@@ -51,27 +50,29 @@ async function loginUser() {
       document.getElementById("userName").textContent = data.name;
       document.getElementById("userRole").textContent = data.role;
       localStorage.setItem("acw_email", email);
-      getSchedule(email);
+      await getSchedule(email);
 
-      // Si es manager o supervisor → activa panel
-     if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
-  const teamDemo = [
-    { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
-    { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },
-    { name: "Luis", shift: "OFF", hours: 0, phone: "16174443322" },
-  ];
-  showManagerPanel(teamDemo);
-}
+      // Mostrar panel manager si aplica
+      if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
+        const teamDemo = [
+          { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
+          { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },
+          { name: "Luis", shift: "OFF", hours: 0, phone: "16174443322" },
+        ];
+        showManagerPanel(teamDemo);
+      }
 
-    } else alert("Invalid credentials");
+    } else {
+      alert("Invalid credentials");
+    }
   } catch (err) {
-    alert("🚨 Connection error");
     console.error("❌ Login error:", err);
+    alert("🚨 Connection error");
   }
 }
 
 /* ===========================================================
-   📅 HORARIO CON CRONÓMETRO ⏱️
+   📅 HORARIO CON CRONÓMETRO
    =========================================================== */
 async function getSchedule(email) {
   try {
@@ -109,7 +110,7 @@ async function getSchedule(email) {
       if (/^\d{1,2}[:.]?\d{0,2}\.?$/.test(shift)) {
         const startTime = shift.replace(/\./g, "").trim();
         window.activeShifts.push({ day: d.name, startTime });
-        hoursDisplay = `<span class='activeTimer' data-time='${startTime}'>⏱️ ${calcActiveHours(startTime).toFixed(1)}h</span>`;
+        hoursDisplay = `<span class='activeTimer' data-time='${startTime}'>${calcActiveHours(startTime).toFixed(1)}h</span>`;
       } else if (/^\d{1,2}[:.]?\d{0,2}\s*[-–]\s*\d{1,2}/.test(shift)) {
         const parts = shift.split("-");
         const start = parts[0].replace(/\./g, "").trim();
@@ -121,7 +122,7 @@ async function getSchedule(email) {
       html += `<tr ${rowStyle}><td>${d.name}</td><td>${shift || "—"}</td><td>${hoursDisplay || "—"}</td></tr>`;
     }
 
-    html += `</tbody></table><p class="total">🕓 Total Hours: <b>${data.total}</b></p>`;
+    html += `</tbody></table><p class="total">Total Hours: <b>${data.total}</b></p>`;
     document.getElementById("schedule").innerHTML = html;
 
     updateTimers();
@@ -131,7 +132,9 @@ async function getSchedule(email) {
   }
 }
 
-/* CALCULOS HORARIOS */
+/* ===========================================================
+   CÁLCULOS HORARIOS
+   =========================================================== */
 function calcActiveHours(startTime) {
   const now = new Date();
   const [h, m = 0] = startTime.split(":").map(Number);
@@ -142,7 +145,6 @@ function calcActiveHours(startTime) {
   if (diff < 0) diff += 12;
   return diff > 0 ? Math.round(diff * 10) / 10 : 0;
 }
-
 function calcFixedHours(a, b) {
   const parse = s => {
     s = s.replace(/\./g, ":").trim();
@@ -153,14 +155,11 @@ function calcFixedHours(a, b) {
   if (diff < 0) diff += 12;
   return Math.round(diff * 10) / 10;
 }
-
 function updateTimers() {
   const timers = document.querySelectorAll(".activeTimer");
-  let total = 0;
   timers.forEach(el => {
     const h = calcActiveHours(el.dataset.time);
-    el.textContent = `⏱️ ${h.toFixed(1)}h`;
-    total += h;
+    el.textContent = `${h.toFixed(1)}h`;
   });
 }
 
@@ -168,7 +167,6 @@ function updateTimers() {
    EMPLOYEE MODAL (solo managers)
    =========================================================== */
 let currentEmp = null;
-
 function openEmployee(emp) {
   currentEmp = emp;
   const modal = document.getElementById("employeeModal");
@@ -178,14 +176,11 @@ function openEmployee(emp) {
   document.getElementById("empMessage").placeholder = TXT.typeMsg;
   document.getElementById("shiftLabel").textContent = TXT.shift;
   document.getElementById("sendMsgBtn").textContent = TXT.sendMsg;
-  document.getElementById("saveShiftBtn").textContent = TXT.saveChanges;
+  document.getElementById("saveShiftBtn").textContent = TXT.close;
 }
-
 function closeEmployeeModal() {
   document.getElementById("employeeModal").style.display = "none";
 }
-
-/* CallMeBot */
 async function sendEmpMessage() {
   if (!currentEmp) return;
   const msg = document.getElementById("empMessage").value.trim();
@@ -197,11 +192,11 @@ async function sendEmpMessage() {
 }
 
 /* ===========================================================
-   PANEL MANAGER (ver empleados)
+   PANEL MANAGER
    =========================================================== */
 function showManagerPanel(list) {
   if (!list.length) return;
-  let html = `<div class='week-header'>Team Schedule Overview</div>
+  let html = `<div class='week-header'><h3>Team Schedule Overview</h3></div>
   <table class='schedule-table'>
   <thead><tr><th>Name</th><th>Shift</th><th>Hours</th><th></th></tr></thead><tbody>`;
   list.forEach(emp => {
@@ -219,36 +214,45 @@ function logoutUser() {
   localStorage.removeItem("acw_email");
   location.reload();
 }
+
 /* ===========================================================
-   🔁 AUTO-LOGIN (mantiene la sesión después de recargar)
+   AUTO-LOGIN
    =========================================================== */
 window.addEventListener("load", async () => {
   const savedEmail = localStorage.getItem("acw_email");
-  if (savedEmail) {
-    try {
-      document.getElementById("login").style.display = "none";
-      document.getElementById("welcome").style.display = "block";
-      await getSchedule(savedEmail);
+  if (!savedEmail) return;
 
-      // 🚀 Cargar info del usuario (para mostrar nombre y rol)
-      const res = await fetch(`${CONFIG.BASE_URL}?action=getUser&email=${encodeURIComponent(savedEmail)}`);
-      const data = await res.json();
-      if (data.ok) {
-        document.getElementById("userName").textContent = data.name;
-        document.getElementById("userRole").textContent = data.role;
+  try {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+    await getSchedule(savedEmail);
 
-        // Si es manager o supervisor → muestra el panel
-        if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
-  const teamList = data.team && data.team.length ? data.team : [
-    { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
-    { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },
-    { name: "Luis", shift: "OFF", hours: 0, phone: "16174443322" },
-  ];
-  showManagerPanel(teamList);
-}
+    const res = await fetch(`${CONFIG.BASE_URL}?action=getUser&email=${encodeURIComponent(savedEmail)}`);
+    const data = await res.json();
+
+    if (data.ok) {
+      document.getElementById("userName").textContent = data.name;
+      document.getElementById("userRole").textContent = data.role;
+
+      if (["manager", "supervisor", "owner"].includes(data.role.toLowerCase())) {
+        const teamList = data.team && data.team.length ? data.team : [
+          { name: "Wendy", shift: "7:30 - 3", hours: 7.5, phone: "16172543210" },
+          { name: "Carlos", shift: "8:00 - 4", hours: 8, phone: "16175551234" },
+          { name: "Luis", shift: "OFF", hours: 0, phone: "16174443322" },
+        ];
+        showManagerPanel(teamList);
+      }
+    } else {
+      document.getElementById("userName").textContent = savedEmail;
+      document.getElementById("userRole").textContent = "Manager";
+    }
+  } catch (err) {
+    console.error("Auto-login error:", err);
   }
-  /* ===========================================================
-   ⚙️ SETTINGS CONTROL (abre / cierra el modal)
+});
+
+/* ===========================================================
+   SETTINGS CONTROL
    =========================================================== */
 function openSettings() {
   document.getElementById("settingsModal").style.display = "block";
@@ -260,4 +264,3 @@ function togglePasswordPanel() {
   const p = document.getElementById("passwordPanel");
   p.style.display = p.style.display === "none" ? "block" : "none";
 }
-});

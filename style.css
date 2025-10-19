@@ -259,6 +259,35 @@ button:hover {
 }
 
 /* 📍 Posiciones */
+/* 📍 Posiciones ajustadas para 4 esquinas visibles */
+.bottom-left {
+  position: fixed;
+  bottom: 12px;
+  left: 20px;
+}
+
+.bottom-left-mid {
+  position: fixed;
+  bottom: 12px;
+  left: 33%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.bottom-right-mid {
+  position: fixed;
+  bottom: 12px;
+  right: 33%;
+  transform: translateX(50%);
+  text-align: center;
+}
+
+.bottom-right {
+  position: fixed;
+  bottom: 12px;
+  right: 20px;
+  text-align: right;
+}
 .bottom-left {
   bottom: 12px;
   left: 16px;

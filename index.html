@@ -28,26 +28,7 @@
     </div>
   </div> <!-- ✅ AQUÍ cerramos correctamente el contenedor -->
 
-  <!-- 🧩 SETTINGS MODAL -->
-  <div id="settingsModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeSettings()">&times;</span>
-      <h3>⚙️ Settings</h3>
-      <hr />
-      <button class="mini-btn" onclick="togglePasswordPanel()">Change Password</button>
-      <button class="mini-btn logoutBtn" onclick="logoutUser()">🚪 Log Out</button>
-
-      <!-- 🔒 Change Password Panel -->
-      <div id="passwordPanel" style="display:none; margin-top:10px;">
-        <input type="password" id="newPassword" placeholder="New password" />
-        <input type="password" id="confirmPassword" placeholder="Confirm password" />
-        <button class="mini-btn" onclick="changeUserPassword()">Save</button>
-        <p id="settingsMsg"></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ⚙️ BOTÓN FLOTANTE -->
+    <!-- ⚙️ BOTÓN FLOTANTE -->
   <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
 
   <!-- 🌐 INFORMACIÓN EN ESQUINAS (afuera del contenedor) -->
@@ -65,6 +46,25 @@
 
   <div class="hud bottom-right">
     Powered by <b>JAG15</b> | Allston Car Wash © 2025
+  </div>
+
+  <!-- 🧩 SETTINGS MODAL -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeSettings()">&times;</span>
+      <h3>⚙️ Settings</h3>
+      <hr />
+      <button class="mini-btn" onclick="togglePasswordPanel()">Change Password</button>
+      <button class="mini-btn logoutBtn" onclick="logoutUser()">🚪 Log Out</button>
+
+      <!-- 🔒 Change Password Panel -->
+      <div id="passwordPanel" style="display:none; margin-top:10px;">
+        <input type="password" id="newPassword" placeholder="New password" />
+        <input type="password" id="confirmPassword" placeholder="Confirm password" />
+        <button class="mini-btn" onclick="changeUserPassword()">Save</button>
+        <p id="settingsMsg"></p>
+      </div>
+    </div>
   </div>
 </body>
 </html>

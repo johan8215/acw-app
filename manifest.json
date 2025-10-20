@@ -1,4 +1,22 @@
-"version": "4.3",
-"name": "Allston Car Wash",
-"short_name": "ACW-App v4.3",
-"description": "Red Glass Edition – October 2025",
+{
+  "name": "Allston Car Wash",
+  "short_name": "ACW-App",
+  "version": "4.3",
+  "description": "Allston Car Wash – Red Glass Edition (v4.3)",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#cc0000",
+  "icons": [
+    {
+      "src": "assets/icon-acw.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-acw-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

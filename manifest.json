@@ -1,11 +1,11 @@
 {
   "name": "Allston Car Wash",
   "short_name": "ACW App",
-  "version": "3.8",
-  "description": "Connected Stable version of Allston Car Wash Schedule Viewer.",
+  "version": "4.2",
+  "description": "Allston Car Wash Red Glass Edition (ACW-App v4.2)",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "theme_color": "#cc0000",
   "icons": [
     {

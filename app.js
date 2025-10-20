@@ -4,6 +4,16 @@
    Uses CONFIG from config.js
    =========================================================== */
 
+document.addEventListener("DOMContentLoaded", () => {
+  const splash = document.getElementById("splash");
+  setTimeout(() => {
+    if (splash) splash.style.display = "none";
+    const login = document.getElementById("login");
+    if (login) login.style.display = "block";
+    console.log("✅ Splash hidden, login shown (emergency fallback)");
+  }, 2000);
+});
+
 /* ---------- i18n ---------- */
 const LANG = navigator.language?.toLowerCase().startsWith("es") ? "es" : (CONFIG.LANG_DEFAULT || "en");
 const TXT = {

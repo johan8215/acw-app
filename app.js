@@ -85,6 +85,48 @@ async function loginUser() {
     alert("Connection error");
   }
 }
+/* ===========================================================
+   🔐 LOGIN — asegura que Role siempre aparezca
+   =========================================================== */
+async function loginUser() {
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value.trim();
+  if (!email || !password) return alert("Please enter your email and password");
+
+  try {
+    const url = `${CONFIG.BASE_URL}?action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.ok) return alert("Invalid credentials");
+
+    // 🔹 guarda email y muestra panel
+    localStorage.setItem("acw_email", email);
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+
+    // 🔹 nombre seguro (sin mostrar email)
+    const displayName = data.name && data.name.trim()
+      ? data.name
+      : (email.split("@")[0] || "").toUpperCase();
+    document.getElementById("userName").textContent = displayName;
+
+    // 🔹 role seguro (aunque el backend no devuelva nada)
+    const role = data.role && data.role.trim() !== "" ? data.role : "Employee";
+    document.getElementById("userRole").textContent = role;
+
+    // 🔹 carga horario
+    await getSchedule(email);
+
+    // 🔹 activa botón Team Overview si aplica
+    if (["manager", "supervisor", "owner"].includes(role.toLowerCase())) {
+      document.getElementById("teamOverviewBtn").style.display = "block";
+    }
+  } catch (err) {
+    console.error("Login error:", err);
+    alert("🚨 Connection error");
+  }
+}
 
 /* ---------- Carga encabezado (auto-login) ---------- */
 async function hydrateUserHeader(email) {

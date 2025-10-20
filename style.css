@@ -1,0 +1,39 @@
+:root{
+  --acw-red:#cc0000;
+  --acw-red-2:#e00000;
+  --ring:rgba(204,0,0,.28);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
+  background:#000;color:#fff;
+  font-family:"SF Pro Display","Segoe UI",sans-serif;
+}
+.container{
+  width:440px;text-align:center;padding:36px 38px;border-radius:20px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 20px 45px rgba(0,0,0,.6);
+  backdrop-filter:blur(16px);
+}
+#splash{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;color:#e6e6e6;z-index:9999}
+.logo-glow{
+  font-size:64px;font-weight:800;letter-spacing:2px;
+  background:linear-gradient(90deg,#cc0000,#ff1a1a,#cc0000);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 3s linear infinite;
+}
+#splash p{font-size:16px;margin-top:10px}
+#splash span{color:#cc0000}
+@keyframes shine{0%{background-position:-200px}100%{background-position:200px}}
+input,textarea{
+  width:100%;padding:10px 12px;margin:8px 0;border-radius:10px;
+  border:1px solid rgba(255,255,255,.25);background:#111;color:#fff;
+}
+button{
+  margin-top:10px;padding:10px 14px;background:var(--acw-red);
+  color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;
+}
+button:hover{background:var(--acw-red-2)}
+.hud.bottom-center{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);
+  color:#999;font-size:13px}

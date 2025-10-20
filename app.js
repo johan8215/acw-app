@@ -21,29 +21,58 @@ window.addEventListener("load", async () => {
 });
 
 /* ---------- Login ---------- */
-async function loginUser(){
+async function loginUser() {
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
-  if(!email || !password) return alert("Please enter your email and password.");
+  if (!email || !password) return alert("Please enter your email and password.");
 
-  try{
-    const res = await fetch(`${CONFIG.BASE_URL}?action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
+  try {
+    const res = await fetch(
+      `${CONFIG.BASE_URL}?action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    );
     const data = await res.json();
-    if(!data.ok) return alert("Invalid credentials.");
 
+    if (!data.ok) {
+      alert("❌ Invalid credentials. Please try again.");
+      return;
+    }
+
+    // ✅ Guardar sesión
     localStorage.setItem("acw_email", email);
-    document.getElementById("login").style.display="none";
-    document.getElementById("welcome").style.display="block";
+    localStorage.setItem("acw_name", data.name || "");
+    localStorage.setItem("acw_role", data.role || "employee");
 
-    document.getElementById("userName").textContent = data.name || (email.split("@")[0]||"").toUpperCase();
-    const role = (data.role||"Employee");
-    document.getElementById("userRole").textContent = role;
+    // ✅ Mostrar pantalla principal
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+    document.getElementById("userName").textContent =
+      data.name || email.split("@")[0].toUpperCase();
+    document.getElementById("userRole").textContent =
+      capitalizeRole(data.role || "employee");
 
+    // ✅ Mostrar horario
     await getSchedule(email);
-    if(isManagerRole(role)) document.getElementById("teamOverviewBtn").style.display="block";
-  }catch(err){
-    console.error(err); alert("Connection error.");
+
+    // ✅ Si es manager, mostrar botón de Team Overview
+    if (isManagerRole(data.role)) {
+      document.getElementById("teamOverviewBtn").style.display = "block";
+    }
+  } catch (err) {
+    console.error("⚠️ Connection error:", err);
+    alert("⚠️ Connection error. Please try again.");
   }
+}
+
+/* 🧠 Funciones auxiliares */
+function capitalizeRole(role) {
+  if (!role) return "Employee";
+  const r = role.toLowerCase();
+  return r.charAt(0).toUpperCase() + r.slice(1);
+}
+
+function isManagerRole(role) {
+  const r = (role || "").toLowerCase();
+  return ["owner", "manager", "supervisor"].includes(r);
 }
 
 /* ---------- Header on autologin ---------- */

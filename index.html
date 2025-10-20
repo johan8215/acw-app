@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACW-App v4.5 Connected Stable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACW-App v4.5 – Connected Stable</title>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#cc0000" />
-  <link rel="apple-touch-icon" href="icons/acw-512.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="ACW-App">
+  <link rel="apple-touch-icon" href="icons/acw-512.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ACW-App" />
 
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Scripts -->
   <script src="config.js"></script>
   <script src="app.js" defer></script>
 </head>
@@ -27,30 +24,29 @@
     <p>Allston Car Wash<br><span>Connected Stable</span></p>
   </div>
 
-  <!-- Main container -->
+  <!-- Panel -->
   <div class="container">
     <h1>ALLSTON CAR WASH</h1>
 
     <!-- Login -->
     <div id="login">
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
+      <input type="email" id="email" placeholder="Email" autocomplete="username" />
+      <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
       <button onclick="loginUser()">Sign In</button>
     </div>
 
     <!-- Welcome -->
     <div id="welcome" style="display:none;">
       <h2>Welcome, <span id="userName"></span></h2>
-      <p>Role: <b><span id="userRole">—</span></b></p>
+      <p>Role: <b><span id="userRole">Employee</span></b></p>
       <div id="schedule"></div>
     </div>
   </div>
 
-  <!-- Floating buttons -->
+  <!-- Team Overview button -->
   <button id="teamOverviewBtn" class="team-btn" style="display:none;" onclick="openTeamOverview()">Team Overview</button>
-  <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
 
-  <!-- Modals -->
+  <!-- Team modal -->
   <div id="teamModal" class="modal">
     <div class="modal-content team-content">
       <span class="close" onclick="closeTeamOverview()">&times;</span>
@@ -59,6 +55,7 @@
     </div>
   </div>
 
+  <!-- Employee modal -->
   <div id="employeeModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeEmployeeModal()">&times;</span>
@@ -70,6 +67,7 @@
     </div>
   </div>
 
+  <!-- Settings -->
   <div id="settingsModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeSettings()">&times;</span>
@@ -77,6 +75,9 @@
       <button onclick="logoutUser()">Log Out</button>
     </div>
   </div>
+
+  <!-- Gear -->
+  <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
 
   <!-- Footer -->
   <div class="hud bottom-center">

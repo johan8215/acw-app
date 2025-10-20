@@ -1,11 +1,10 @@
 /* ===========================================================
-   ACW-App v4.0 Red Glass Edition
-   Author: Johan A. Giraldo (JG) | Allston Car Wash
+   ACW-App v4.4 Connected & Messaging Edition
+   (mantiene tu conexión estable)
    =========================================================== */
-
 const CONFIG = {
   BASE_URL: "https://script.google.com/macros/s/AKfycbyvKBaKxvAhoudDIXjUcmIef31ZTyvhujLRxzOoyQBneGpnpcnJkYpyzvXS3SCve4Z6/exec",
-  API_KEY: "4859356", // ✅ CallMeBot API key
   APP_NAME: "Allston Car Wash",
-  VERSION: "4.0.Red.Glass"
+  VERSION: "4.4.RedGlass",
+  API_KEY: "4859356"   // ← CallMeBot (fija en código, como antes)
 };

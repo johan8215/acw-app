@@ -1,115 +1,147 @@
 /* ===========================================================
-   🎨 ACW-App v4.5.2 – Red Glass LIVE (Style)
-   Designed by Johan A. Giraldo (JAG15) & Sky
+   🎨 ACW-App v4.6.5 — Red Glass Direct Login (No Splash)
+   Author: Johan A. Giraldo (JAG15) & Sky
    =========================================================== */
 
-:root{
-  --acw-red:#cc0000;
-  --acw-red-2:#e00000;
-  --acw-bg:#000000;
-  --acw-white:#ffffff;
+/* 🔹 Fondo general */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "SF Pro Display", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #200000, #4a0000);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-*{box-sizing:border-box; margin:0; padding:0;}
-
-body{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:var(--acw-bg);
-  color:var(--acw-white);
-  font-family:"SF Pro Display","Segoe UI",system-ui,-apple-system,sans-serif;
+/* 🔹 Contenedores principales */
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 32px;
+  text-align: center;
+  backdrop-filter: blur(10px);
 }
 
-/* 🧱 Container */
-.container{
-  width:440px;
-  text-align:center;
-  padding:36px 38px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.1);
-  box-shadow:0 20px 45px rgba(0,0,0,0.7);
-  backdrop-filter:blur(16px);
+/* 🔹 Inputs */
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
 }
 
-
-.logo-glow{
-  font-size:64px;font-weight:800;letter-spacing:2px;
-  background:linear-gradient(90deg,#cc0000,#ff1a1a,#cc0000);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  animation:shine 3s linear infinite;
-}
-#splash p{font-size:16px;margin-top:10px;}
-#splash span{color:#cc0000;}
-@keyframes shine{0%{background-position:-200px}100%{background-position:200px}}
-
-/* Inputs & Buttons */
-input,textarea{
-  width:100%;padding:10px 12px;margin:8px 0;
-  border-radius:10px;border:1px solid rgba(255,255,255,0.25);
-  background:#111;color:#fff;outline:none;
-}
-input:focus,textarea:focus{box-shadow:0 0 0 3px rgba(204,0,0,0.3);}
-button{
-  margin-top:10px;padding:10px 14px;
-  background:var(--acw-red);
-  color:#fff;border:none;border-radius:10px;
-  font-weight:700;cursor:pointer;transition:0.3s;
-}
-button:hover{background:var(--acw-red-2);}
-
-/* Footer */
-.hud.bottom-center{
-  position:fixed;
-  bottom:10px;left:50%;
-  transform:translateX(-50%);
-  color:#999;
-  font-size:13px;
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-/* ⚙️ Gear button */
-.gear-btn{
-  position:fixed;bottom:72px;right:20px;
-  width:50px;height:50px;border-radius:50%;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,0,0,0.4);
-  color:#fff;font-size:22px;cursor:pointer;
-  backdrop-filter:blur(8px);
-  transition:0.3s;
+/* 🔹 Botones */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #b30000, #ff3333);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.gear-btn:hover{background:rgba(255,0,0,0.25);transform:rotate(90deg);}
 
-/* 🪟 Modals */
-.modal{
-  display:none;
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.65);
-  backdrop-filter:blur(6px);
-  justify-content:center;align-items:center;
-  z-index:999;
+button:hover {
+  background: linear-gradient(90deg, #ff4444, #b30000);
 }
-.modal-content{
-  width:420px;background:#111;color:#fff;
-  border-radius:18px;
-  border:1px solid rgba(255,0,0,0.25);
-  box-shadow:0 15px 40px rgba(255,0,0,0.25);
-  padding:28px 32px;text-align:center;
-  animation:fadeUp 0.35s ease;
-  position:relative;
-}
-.modal-content h2{color:var(--acw-red);}
-.close{
-  position:absolute;right:18px;top:12px;
-  color:#ff3b3b;font-size:22px;font-weight:800;cursor:pointer;
-}
-.close:hover{color:#ff6666;}
-@keyframes fadeUp{from{transform:translateY(36px);opacity:0}to{transform:none;opacity:1}}
 
-/* 🧾 Tables */
-.week-header{background:#1a1a1a;border-radius:10px;margin:12px 0;padding:6px 0;font-weight:700;color:#ff4d4d;}
-.schedule-table{width:100%;border-collapse:collapse;margin-top:10px;}
-.schedule-table th,.schedule-table td{border-bottom:1px solid rgba(255,255,255,0.1);padding:6px;text-align:center;}
-.schedule-table th{color:#ff4d4d;}
-.total{color:var(--acw-red);font-weight:700;margin-top:10px;}
+/* 🔹 Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #ff9999;
+}
+
+/* 🔹 Modal (fondo) */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 🔹 Modal (contenido) */
+.modal-content {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* 🔹 Botón cerrar */
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* 🔹 Gear button */
+.gear-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* 🔹 Footer */
+.hud.bottom-center {
+  position: fixed;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}

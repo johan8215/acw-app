@@ -170,10 +170,9 @@ function openEmployee(emp) {
   currentEmp = emp;
   const modal = document.getElementById("employeeModal");
   modal.style.display = "flex";
-  modal.style.alignItems = "center";
   modal.style.justifyContent = "center";
+  modal.style.alignItems = "center";
 
-  // Ejemplo de datos semanales
   const weekData = [
     { day: "Mon", shift: "OFF", hours: "—" },
     { day: "Tue", shift: "8:00 - 4", hours: 8 },
@@ -185,28 +184,26 @@ function openEmployee(emp) {
   ];
 
   let html = `
-    <div class="emp-card">
+    <div class="modal-content">
+      <span class="close" onclick="closeEmployeeModal()">&times;</span>
       <h2>${emp.name}</h2>
-      <p class="emp-role">${emp.role || "Employee"}</p>
-      <p class="emp-phone">${emp.phone}</p>
+      <p>${emp.role || "Employee"}</p>
+      <p>${emp.phone}</p>
       <div class="week-header">Week Overview</div>
       <table class="schedule-table">
         <thead><tr><th>Day</th><th>Shift</th><th>Hours</th></tr></thead>
         <tbody>
-  `;
-
-  weekData.forEach(d => {
-    html += `<tr><td>${d.day}</td><td>${d.shift}</td><td>${d.hours}</td></tr>`;
-  });
-
-  html += `
+          ${weekData.map(d => `<tr><td>${d.day}</td><td>${d.shift}</td><td>${d.hours}</td></tr>`).join("")}
         </tbody>
       </table>
       <p class="total">Total Hours: <b>42.5</b></p>
-      <textarea id="empMessage" placeholder="${TXT.typeMsg || 'Type your message here…'}"></textarea>
-      <button id="sendMsgBtn" onclick="sendEmpMessage()">Send Message</button>
+      <textarea id="empMessage" placeholder="Type your message here…"></textarea>
+      <button onclick="sendEmpMessage()">Send Message</button>
     </div>
   `;
+
+  modal.innerHTML = html;
+}
 
   modal.innerHTML = `
     <div class="modal-content emp-view">

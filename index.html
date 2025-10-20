@@ -3,45 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACW-App v4.5 – Red Glass Edition</title>
+  <title>ACW-App v4.5 Connected Stable</title>
 
-  <!-- 📱 Progressive Web App -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#cc0000">
-
-  <!-- 📱 Apple iOS PWA support -->
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#cc0000" />
   <link rel="apple-touch-icon" href="icons/acw-512.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ACW-App">
 
-  <!-- 🎨 Estilos -->
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- ⚙️ Scripts principales -->
+  <!-- Scripts -->
   <script src="config.js"></script>
   <script src="app.js" defer></script>
 </head>
-
 <body>
-  <!-- 🚀 SPLASH SCREEN -->
+  <!-- Splash -->
   <div id="splash">
     <div class="logo-glow">ACW</div>
-    <p>Allston Car Wash<br><span>Red Glass Edition v4.5</span></p>
+    <p>Allston Car Wash<br><span>Connected Stable</span></p>
   </div>
 
-  <!-- 🧱 CONTENEDOR PRINCIPAL -->
+  <!-- Main container -->
   <div class="container">
     <h1>ALLSTON CAR WASH</h1>
 
-    <!-- 🔐 LOGIN -->
+    <!-- Login -->
     <div id="login">
-      <input type="email" id="email" placeholder="Email" autocomplete="username" />
-      <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
       <button onclick="loginUser()">Sign In</button>
     </div>
 
-    <!-- 👋 WELCOME -->
+    <!-- Welcome -->
     <div id="welcome" style="display:none;">
       <h2>Welcome, <span id="userName"></span></h2>
       <p>Role: <b><span id="userRole">—</span></b></p>
@@ -49,10 +46,11 @@
     </div>
   </div>
 
-  <!-- 👥 TEAM OVERVIEW FLOAT BUTTON -->
+  <!-- Floating buttons -->
   <button id="teamOverviewBtn" class="team-btn" style="display:none;" onclick="openTeamOverview()">Team Overview</button>
+  <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
 
-  <!-- 👥 TEAM OVERVIEW MODAL -->
+  <!-- Modals -->
   <div id="teamModal" class="modal">
     <div class="modal-content team-content">
       <span class="close" onclick="closeTeamOverview()">&times;</span>
@@ -61,7 +59,6 @@
     </div>
   </div>
 
-  <!-- 👤 EMPLOYEE MODAL -->
   <div id="employeeModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeEmployeeModal()">&times;</span>
@@ -70,11 +67,9 @@
       <div id="empTable"></div>
       <textarea id="empMessage" placeholder="Type your message here…"></textarea>
       <button id="sendMsgBtn" onclick="sendEmpMessage()">Send Message</button>
-      <button id="closeBtn" onclick="closeEmployeeModal()">Close</button>
     </div>
   </div>
 
-  <!-- ⚙️ SETTINGS MODAL -->
   <div id="settingsModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeSettings()">&times;</span>
@@ -83,10 +78,7 @@
     </div>
   </div>
 
-  <!-- ⚙️ GEAR BUTTON -->
-  <button id="gearButton" class="gear-btn" onclick="openSettings()">⚙️</button>
-
-  <!-- 🔻 FOOTER -->
+  <!-- Footer -->
   <div class="hud bottom-center">
     Powered by <b>JAG15</b> | Allston Car Wash © 2025
   </div>

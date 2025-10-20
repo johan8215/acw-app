@@ -31,40 +31,42 @@ const DAY_ORDER = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
   }catch(_){/* silent */}
 })();
 
-/* ---------- App boot ---------- */
+/* --------------------------------------------------------------
+   🚀 Splash + Auto Login Handler (Fixed for Safari & iPhone)
+-------------------------------------------------------------- */
 window.addEventListener("load", async () => {
-  // 🔄 Ocultar splash siempre, incluso si hay error
-  setTimeout(() => {
-    const s = document.getElementById("splash");
-    if (s) s.style.display = "none";
+  try {
+    // 🔹 Oculta el splash después de 1.2 segundos
+    setTimeout(() => {
+      const s = document.getElementById("splash");
+      if (s) s.style.display = "none";
+    }, 1200);
 
-    // ✅ Asegurar que el login sea visible si no hay sesión
+    // 🔹 Revisa si hay sesión guardada
+    const savedEmail = localStorage.getItem("acw_email");
+
+    if (!savedEmail) {
+      // Mostrar login si no hay sesión
+      const loginBox = document.getElementById("login");
+      if (loginBox) loginBox.style.display = "block";
+      console.log("👋 No session found — showing login");
+      return;
+    }
+
+    // 🔹 Cargar datos del usuario
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+    await hydrateUserHeader(savedEmail);
+    await getSchedule(savedEmail);
+    await maybeEnableTeam(savedEmail);
+
+    console.log("✅ Auto-login success:", savedEmail);
+  } catch (err) {
+    console.warn("⚠️ Load failed:", err);
+    const splash = document.getElementById("splash");
+    if (splash) splash.style.display = "none";
     const login = document.getElementById("login");
-    const welcome = document.getElementById("welcome");
-    if (login && welcome) {
-      if (!localStorage.getItem("acw_email")) {
-        login.style.display = "block";
-        welcome.style.display = "none";
-      }
-    }
-  }, 1000);
-
-  // 🧠 Si hay sesión guardada, intentar autologin
-  const saved = localStorage.getItem("acw_email");
-  if (saved) {
-    try {
-      document.getElementById("login").style.display = "none";
-      document.getElementById("welcome").style.display = "block";
-      await hydrateUserHeader(saved);
-      await getSchedule(saved);
-      await maybeEnableTeam(saved);
-    } catch (e) {
-      console.warn("⚠️ Autologin failed:", e);
-      document.getElementById("login").style.display = "block";
-    }
-  } else {
-    // 🧭 Primera vez: mostrar login
-    document.getElementById("login").style.display = "block";
+    if (login) login.style.display = "block";
   }
 });
 

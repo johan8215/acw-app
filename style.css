@@ -1,28 +1,80 @@
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  color: #fff;
-  background: radial-gradient(1000px 800px at 30% 20%, #3b0000 0%, #1a0000 70%, #0d0000 100%) fixed;
+/* ACW-App v4.5 – Red Glass Bright */
+:root{
+  --acw-red:#cc0000;
+  --acw-red-2:#e00000;
+  --ring: rgba(204,0,0,.28);
 }
-.container {
-  max-width: 760px;
-  margin: 48px auto;
-  padding: 28px 32px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  backdrop-filter: blur(16px);
+*{box-sizing:border-box}
+body{
+  margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
+  background:#fff;color:var(--acw-red);
+  font-family:"SF Pro Display","Segoe UI",system-ui,-apple-system,sans-serif;
 }
-button {
-  background:#cc0000;color:#fff;border:none;padding:10px 20px;
-  border-radius:6px;cursor:pointer;font-weight:600;
+
+.container{
+  width:440px;text-align:center;padding:36px 38px;border-radius:20px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(204,0,0,.22);
+  box-shadow:0 22px 48px var(--ring);
+  backdrop-filter: blur(12px);
 }
-.team-btn,.gear-btn {
-  position:fixed;bottom:20px;border-radius:50%;width:54px;height:54px;
-  border:none;color:white;font-size:26px;cursor:pointer;background:#cc0000;
+
+/* Splash */
+#splash{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#e6e6e6;z-index:9999}
+.logo-glow{
+  font-size:64px;font-weight:800;letter-spacing:2px;
+  background:linear-gradient(90deg,#cc0000,#ff1a1a,#cc0000);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 3s linear infinite
 }
-.team-btn{right:90px;} .gear-btn{right:20px;}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);}
-.modal-content{background:#111;padding:20px;margin:10% auto;border-radius:10px;max-width:500px;color:#fff;}
-.hud{position:fixed;bottom:5px;width:100%;text-align:center;font-size:12px;opacity:.7;}
+#splash p{font-size:16px;margin-top:10px}
+#splash span{color:#ff3b3b}
+@keyframes shine{0%{background-position:-200px}100%{background-position:200px}}
+
+/* Inputs & buttons */
+input, textarea{
+  width:100%;padding:10px 12px;margin:8px 0;border-radius:10px;
+  border:1px solid rgba(204,0,0,.2);outline:none;color:#222;background:#fff
+}
+input:focus, textarea:focus{box-shadow:0 0 0 4px rgba(204,0,0,.12)}
+button{
+  margin-top:10px;padding:10px 14px;background:var(--acw-red);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700
+}
+button:hover{background:var(--acw-red-2)}
+
+/* Footer */
+.hud.bottom-center{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);color:var(--acw-red);font-size:13px}
+
+/* Gear */
+.gear-btn{
+  position:fixed;bottom:72px;right:20px;width:50px;height:50px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,0,0,.35);color:var(--acw-red);font-size:22px;cursor:pointer;backdrop-filter:blur(8px);transition:.25s
+}
+.gear-btn:hover{background:rgba(255,0,0,.18);transform:rotate(90deg)}
+
+/* Modals */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);z-index:999;justify-content:center;align-items:center}
+.modal-content{
+  width:420px;background:#fff;border-radius:18px;border:1px solid rgba(204,0,0,.25);
+  box-shadow:0 15px 40px rgba(204,0,0,.25);padding:28px 32px;color:#b30000;text-align:center;animation:fadeUp .35s ease;position:relative
+}
+.modal-content h3{margin-top:0;color:var(--acw-red);font-weight:800}
+.close{position:absolute;right:18px;top:12px;color:var(--acw-red);font-size:22px;font-weight:800;cursor:pointer}
+.close:hover{color:#ff1a1a}
+@keyframes fadeUp{from{transform:translateY(36px);opacity:0}to{transform:none;opacity:1}}
+
+/* Tables */
+.week-header{background:#f6f6f6;border-radius:10px;margin:12px 0;padding:6px 0;font-weight:700;color:#b30000}
+.schedule-table{width:100%;border-collapse:collapse;margin-top:10px}
+.schedule-table th,.schedule-table td{border-bottom:1px solid rgba(204,0,0,.22);padding:6px;text-align:center}
+.schedule-table th{color:#b30000}
+.total{color:var(--acw-red);font-weight:700;margin-top:10px}
+
+/* Team */
+.team-btn{position:fixed;top:14px;right:16px;background:var(--acw-red);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(204,0,0,.35)}
+.team-btn:hover{background:var(--acw-red-2)}
+.team-content{max-width:700px;padding:26px}
+#teamTable table{width:100%;border-collapse:collapse}
+#teamTable th,#teamTable td{border-bottom:1px solid rgba(204,0,0,.2);padding:8px;text-align:left}
+#teamTable td button{background:var(--acw-red);color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer}
+#teamTable td button:hover{background:var(--acw-red-2)}

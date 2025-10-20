@@ -3,6 +3,35 @@
    Author: Johan A. Giraldo (JAG15) & Sky
    =========================================================== */
 
+/* 🚦 Connection Check (auto-ping on load) */
+(async () => {
+  try {
+    const ping = await fetch(`${CONFIG.BASE_URL}?action=ping`);
+    const txt = await ping.text();
+    console.log("✅ Backend responding:", txt);
+    document.body.insertAdjacentHTML("beforeend",
+      `<div id="conn-status" style="
+        position:fixed;top:6px;right:10px;
+        background:rgba(0,255,0,0.15);
+        color:#0f0;padding:2px 8px;
+        font-size:11px;border-radius:4px;
+        font-family:monospace;z-index:9999;">
+        CONNECTED
+      </div>`);
+  } catch (err) {
+    console.warn("❌ No connection:", err);
+    document.body.insertAdjacentHTML("beforeend",
+      `<div id="conn-status" style="
+        position:fixed;top:6px;right:10px;
+        background:rgba(255,0,0,0.2);
+        color:#f33;padding:2px 8px;
+        font-size:11px;border-radius:4px;
+        font-family:monospace;z-index:9999;">
+        OFFLINE
+      </div>`);
+  }
+})();
+
 const LANG = navigator.language?.toLowerCase().startsWith("es") ? "es" : "en";
 const TXT = {
   en: { welcome:"Welcome,", role:"Role", day:"Day", shift:"Shift", hours:"Hours", total:"Total Hours", weekOf:"Week of", weekOverview:"Week Overview", sendMsg:"Send Message", typeMsg:"Type your message here…" },

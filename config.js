@@ -4,9 +4,9 @@
    =========================================================== */
 
 const CONFIG = {
-  /* 🌐 Google Apps Script endpoint (ACW backend) */
-  BASE_URL: "https://script.google.com/macros/s/AKfycbyvKBaKxvAhoudDIXjUcmIef31ZTyvhujLRxzOoyQBneGpnpcnJkYpyzvXS3SCve4Z6/exec",
-
+  BASE_URL: "https://script.google.com/macros/s/AKfycbyDOlShXJaUAGqczuYQ0-NW9rIpRR372kW54ayPdjYsEbyNVAV-Ju_0-YQbyFUBmJ_T/exec",
+  API_KEY: "4859356"
+};
   /* 🔑 CallMeBot API Key (mensajes manuales) */
   API_KEY: "4859356",
 

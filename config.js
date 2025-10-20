@@ -4,7 +4,7 @@
    =========================================================== */
 
 const CONFIG = {
-BASE_URL: "https://script.google.com/macros/s/AKfycbxdnmF8hcWZ6MqY30Zr-HTAXfw2Rfvd0JWjLMRXfCscGNMeyKNpf0pzln8VAfHBZvZ2/exec",
+BASE_URL: "https://script.google.com/macros/s/AKfycbyY55LeXxMtlrNovUtnLKrEblrel6ljRnBjOpB2qWNSUnyMPLmWTuzScqSYGStKZ-2l/exec",
   API_KEY: "4859356",
   LANG_DEFAULT: "en",
   TIMEZONE: "America/New_York",

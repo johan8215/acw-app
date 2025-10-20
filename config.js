@@ -1,11 +1,11 @@
 /* ===========================================================
-   ⚙️ ACW-App v4.5 – Connected & Messaging (LIVE)
+   ⚙️ ACW-App v4.5.1 – Connected & Messaging (LIVE)
    Author: Johan A. Giraldo (JG) & Sky
    =========================================================== */
 
 const CONFIG = {
   /* 🌐 Backend principal (Apps Script Web App) */
-  BASE_URL: "https://script.google.com/macros/s/AKfycbzWZMwaK7dRHwJxNgNH4i3QQsxFq_3BS-ZE3nvnIcYW6QhNr6h0xrFLkEWFVy5nNZBG/exec",
+  BASE_URL: "https://script.google.com/macros/s/AKfycbw3KnPXBs09H4hdXIpe9tAateWjpEArU2xryvZ8hrNGK6cn5d_sdMk3rrPbrCheepr1/exec",
 
   /* 🔑 CallMeBot API Key (para mensajes manuales) */
   API_KEY: "4859356",
@@ -17,7 +17,7 @@ const CONFIG = {
 
   /* 🧩 Información de build */
   APP_NAME: "Allston Car Wash App",
-  APP_VERSION: "v4.5 Connected & Messaging",
+  APP_VERSION: "v4.5.1 Connected & Messaging",
   BUILD_DATE: "2025-10-19"
 };
 

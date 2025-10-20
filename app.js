@@ -344,3 +344,20 @@ document.addEventListener("keydown",e=>{
   const el=document.getElementById(id); if(!el) return;
   el.addEventListener("click",ev=>{ if(ev.target===el) el.style.display="none"; });
 });
+/* =======================================================
+   🧩 SAFARI FIX: Forzar ocultar splash si load falla
+   ======================================================= */
+setTimeout(() => {
+  const splash = document.getElementById("splash");
+  const login  = document.getElementById("login");
+  const welcome = document.getElementById("welcome");
+
+  // Si sigue mostrándose ACW después de 2.5s, forzamos login visible
+  if (splash && splash.style.display !== "none") {
+    splash.style.display = "none";
+    if (welcome && welcome.style.display !== "block") {
+      login.style.display = "block";
+      console.log("🧩 Safari fallback → showing login manually");
+    }
+  }
+}, 2500);

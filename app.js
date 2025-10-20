@@ -1,17 +1,13 @@
 /* ===========================================================
-   ⚙️ ACW-App v4.5.2 – Red Glass LIVE (app.js)
+   ⚙️ ACW-App v4.6.5 – Red Glass DIRECT LOGIN (No Splash)
    Author: Johan A. Giraldo (JAG15) & Sky
-   Uses CONFIG from config.js
    =========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const splash = document.getElementById("splash");
-  setTimeout(() => {
-    if (splash) splash.style.display = "none";
-    const login = document.getElementById("login");
-    if (login) login.style.display = "block";
-    console.log("✅ Splash hidden, login shown (emergency fallback)");
-  }, 2000);
+  const login = document.getElementById("login");
+  const welcome = document.getElementById("welcome");
+  if (login) login.style.display = "block";
+  console.log("🚀 Splash removed → login shown immediately");
 });
 
 /* ---------- i18n ---------- */

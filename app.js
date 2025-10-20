@@ -53,40 +53,8 @@ window.addEventListener("load", async () => {
   }
 });
 
-/* ---------- Login ---------- */
-async function loginUser() {
-  const email = document.getElementById("email").value.trim().toLowerCase();
-  const password = document.getElementById("password").value.trim();
-  if (!email || !password) return alert("Enter your email and password.");
-
-  try {
-    const url = `${CONFIG.BASE_URL}?action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if (!data.ok) return alert("Invalid credentials");
-
-    localStorage.setItem("acw_email", email);
-    document.getElementById("login").style.display = "none";
-    document.getElementById("welcome").style.display = "block";
-
-    const displayName = data.name && data.name.trim()
-      ? data.name
-      : (email.split("@")[0] || "").toUpperCase();
-    document.getElementById("userName").textContent = displayName;
-    document.getElementById("userRole").textContent = data.role || "—";
-
-    await getSchedule(email);
-    if (isManagerRole(data.role)) {
-      document.getElementById("teamOverviewBtn").style.display = "block";
-    }
-  } catch (e) {
-    console.error(e);
-    alert("Connection error");
-  }
-}
 /* ===========================================================
-   🔐 LOGIN — asegura que Role siempre aparezca
+   🔐 LOGIN — versión limpia y segura (Role siempre visible)
    =========================================================== */
 async function loginUser() {
   const email = document.getElementById("email").value.trim().toLowerCase();
@@ -100,25 +68,25 @@ async function loginUser() {
 
     if (!data.ok) return alert("Invalid credentials");
 
-    // 🔹 guarda email y muestra panel
+    // 🔹 guarda sesión
     localStorage.setItem("acw_email", email);
     document.getElementById("login").style.display = "none";
     document.getElementById("welcome").style.display = "block";
 
-    // 🔹 nombre seguro (sin mostrar email)
+    // 🔹 nombre (seguro, sin mostrar email)
     const displayName = data.name && data.name.trim()
       ? data.name
       : (email.split("@")[0] || "").toUpperCase();
     document.getElementById("userName").textContent = displayName;
 
-    // 🔹 role seguro (aunque el backend no devuelva nada)
+    // 🔹 role (si no viene, muestra “Employee”)
     const role = data.role && data.role.trim() !== "" ? data.role : "Employee";
     document.getElementById("userRole").textContent = role;
 
-    // 🔹 carga horario
+    // 🔹 carga horario personal
     await getSchedule(email);
 
-    // 🔹 activa botón Team Overview si aplica
+    // 🔹 activa botón Team Overview solo si el rol aplica
     if (["manager", "supervisor", "owner"].includes(role.toLowerCase())) {
       document.getElementById("teamOverviewBtn").style.display = "block";
     }
@@ -127,7 +95,6 @@ async function loginUser() {
     alert("🚨 Connection error");
   }
 }
-
 /* ---------- Carga encabezado (auto-login) ---------- */
 async function hydrateUserHeader(email) {
   try {

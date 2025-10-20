@@ -5,7 +5,7 @@
 
 const CONFIG = {
   /* 🌐 Backend principal (Apps Script Web App) */
-  BASE_URL: "https://script.google.com/macros/s/AKfycbxbAmmkRL5zK-zsHGJ5Imx05qMqUv5NwQexXF9HjFoT1ZkluT2sr9GJAK43JBK0YpM3/exec",
+  BASE_URL: "https://script.google.com/macros/s/AKfycbzWZMwaK7dRHwJxNgNH4i3QQsxFq_3BS-ZE3nvnIcYW6QhNr6h0xrFLkEWFVy5nNZBG/exec",
 
   /* 🔑 CallMeBot API Key (para mensajes manuales) */
   API_KEY: "4859356",

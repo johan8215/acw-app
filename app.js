@@ -33,28 +33,38 @@ const DAY_ORDER = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 /* ---------- App boot ---------- */
 window.addEventListener("load", async () => {
-  // Hide splash after 0.8s no matter what
-  setTimeout(()=>{ const s=document.getElementById("splash"); if(s) s.style.display="none"; },800);
+  // 🔄 Ocultar splash siempre, incluso si hay error
+  setTimeout(() => {
+    const s = document.getElementById("splash");
+    if (s) s.style.display = "none";
 
-  const saved = localStorage.getItem("acw_email");
-  if(!saved){
-    // show login
+    // ✅ Asegurar que el login sea visible si no hay sesión
     const login = document.getElementById("login");
-    if(login) login.style.display="block";
-    return;
-  }
+    const welcome = document.getElementById("welcome");
+    if (login && welcome) {
+      if (!localStorage.getItem("acw_email")) {
+        login.style.display = "block";
+        welcome.style.display = "none";
+      }
+    }
+  }, 1000);
 
-  // autologin path
-  document.getElementById("login").style.display="none";
-  document.getElementById("welcome").style.display="block";
-  try{
-    await hydrateUserHeader(saved);
-    await getSchedule(saved);
-    await maybeEnableTeam(saved);
-  }catch(e){
-    console.warn("Autologin failed:", e);
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("login").style.display="block";
+  // 🧠 Si hay sesión guardada, intentar autologin
+  const saved = localStorage.getItem("acw_email");
+  if (saved) {
+    try {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("welcome").style.display = "block";
+      await hydrateUserHeader(saved);
+      await getSchedule(saved);
+      await maybeEnableTeam(saved);
+    } catch (e) {
+      console.warn("⚠️ Autologin failed:", e);
+      document.getElementById("login").style.display = "block";
+    }
+  } else {
+    // 🧭 Primera vez: mostrar login
+    document.getElementById("login").style.display = "block";
   }
 });
 

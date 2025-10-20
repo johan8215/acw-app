@@ -1,31 +1,30 @@
 /* ===========================================================
-   ⚙️ ACW-App v4.5 Configuration File
+   ⚙️ ACW-App v4.5 – Connected Stable
    Author: Johan A. Giraldo (JG) & Sky
    =========================================================== */
 
 const CONFIG = {
   /* =======================================================
-     🌐 GOOGLE APPS SCRIPT ENDPOINT
-     Reemplaza esta URL por tu Script WebApp desplegado:
+     🌐 GOOGLE APPS SCRIPT ENDPOINT (Allston Car Wash)
      ======================================================= */
-  BASE_URL: "https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/exec",
+  BASE_URL: "https://script.google.com/macros/s/AKfycbyvKBaKxvAhoudDIXjUcmIef31ZTyvhujLRxzOoyQBneGpnpcnJkYpyzvXS3SCve4Z6/exec",
 
   /* =======================================================
-     🔑 CALLMEBOT API KEY (para mensajes manuales)
-     Puedes generarla gratis en: https://www.callmebot.com/
+     🔑 CALLMEBOT API KEY — para mensajes manuales
+     (ejemplo: "123456" — cámbiala por la tuya)
      ======================================================= */
-  API_KEY: "123456",  // <-- tu clave aquí
+  API_KEY: "123456",
 
   /* =======================================================
-     🕒 OPCIONES DE FORMATO Y SISTEMA
+     🕒 OPCIONES GENERALES
      ======================================================= */
-  LANG_DEFAULT: "en",         // "en" o "es"
-  TIMEZONE: "America/New_York",
-  DEBUG_MODE: false            // true = log extra en consola
+  LANG_DEFAULT: "en",            // "en" o "es"
+  TIMEZONE: "America/New_York",  // zona horaria Boston
+  DEBUG_MODE: false              // true = logs en consola
 };
 
 /* ===========================================================
-   🔍 Helper global (debug)
+   🔍 Debug Helper
    =========================================================== */
 if (CONFIG.DEBUG_MODE) {
   console.log("✅ ACW-App Config Loaded", CONFIG);

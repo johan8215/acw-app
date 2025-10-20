@@ -164,26 +164,59 @@ function openTeamOverview() {
 function closeTeamOverview(){ document.getElementById("teamModal").style.display = "none"; }
 
 /* ===========================================================
-   👤 EMPLOYEE MODAL
+   👤 EMPLOYEE VIEW — estilo igual al horario principal
    =========================================================== */
-let currentEmp = null;
-function openEmployee(emp){
-  currentEmp=emp;
-  const modal=document.getElementById("employeeModal");
-  modal.style.display="block";
-  document.getElementById("empName").textContent=emp.name;
-  document.getElementById("empPhone").textContent="Phone: "+emp.phone;
-  document.getElementById("empShift").value=emp.shift;
-}
-function closeEmployeeModal(){ document.getElementById("employeeModal").style.display="none"; }
+function openEmployee(emp) {
+  currentEmp = emp;
+  const modal = document.getElementById("employeeModal");
+  modal.style.display = "block";
 
-async function sendEmpMessage(){
-  const msg=document.getElementById("empMessage").value.trim();
-  if(!msg)return alert("Please write a message first.");
-  const phone=document.getElementById("empPhone").textContent.replace(/\D/g,"");
-  const api=`https://api.callmebot.com/whatsapp.php?phone=1${phone}&text=${encodeURIComponent(msg)}&apikey=${CONFIG.API_KEY}`;
-  await fetch(api);
-  alert("Message sent successfully!");
+  // Ejemplo de datos semanales del empleado (puedes conectar a tu Sheet si deseas)
+  const weekData = [
+    { day: "Mon", shift: "OFF", hours: "—" },
+    { day: "Tue", shift: "8:00 - 4", hours: 8 },
+    { day: "Wed", shift: "7:30 - 3", hours: 7.5 },
+    { day: "Thu", shift: "7:30 - 6", hours: 10.5 },
+    { day: "Fri", shift: "7:30 - 2:30", hours: 7 },
+    { day: "Sat", shift: "7:30 - 5", hours: 9.5 },
+    { day: "Sun", shift: "OFF", hours: "—" }
+  ];
+
+  let html = `
+    <div class="emp-card">
+      <h2>${emp.name}</h2>
+      <p class="emp-phone">${emp.phone}</p>
+      <div class="week-header">
+        <h3>Week Overview</h3>
+      </div>
+      <table class="schedule-table">
+        <thead><tr><th>Day</th><th>Shift</th><th>Hours</th></tr></thead>
+        <tbody>
+  `;
+
+  weekData.forEach(d => {
+    html += `<tr><td>${d.day}</td><td>${d.shift}</td><td>${d.hours}</td></tr>`;
+  });
+
+  html += `
+        </tbody>
+      </table>
+      <p class="total">Total Hours: <b>42.5</b></p>
+      <textarea id="empMessage" placeholder="${TXT.typeMsg}"></textarea>
+      <button id="sendMsgBtn" onclick="sendEmpMessage()">Send Message</button>
+    </div>
+  `;
+
+  document.getElementById("employeeModal").innerHTML = `
+    <div class="modal-content emp-view">
+      <span class="close" onclick="closeEmployeeModal()">&times;</span>
+      ${html}
+    </div>
+  `;
+}
+
+function closeEmployeeModal() {
+  document.getElementById("employeeModal").style.display = "none";
 }
 
 /* ===========================================================

@@ -1,11 +1,12 @@
 /* ===========================================================
    ⚙️ ACW-App v4.5.1 – Connected & Messaging (LIVE)
-   Author: Johan A. Giraldo (JG) & Sky
+   Author: Johan A. Giraldo (JG15) & Sky
    =========================================================== */
 
 const CONFIG = {
   /* 🌐 Backend principal (Apps Script Web App) */
   BASE_URL: "https://script.google.com/macros/s/AKfycbw3KnPXBs09H4hdXIpe9tAateWjpEArU2xryvZ8hrNGK6cn5d_sdMk3rrPbrCheepr1/exec",
+
   /* 🔑 CallMeBot API Key (para mensajes manuales) */
   API_KEY: "4859356",
 
@@ -21,12 +22,12 @@ const CONFIG = {
 };
 
 /* ===========================================================
-   🧠 DEBUG / Versión flotante
+   🧠 DEBUG / Version label
    =========================================================== */
 if (CONFIG.DEBUG_MODE)
   console.log("✅ ACW-App Config Loaded", CONFIG);
 
-/* 🏷️ Inserta una pequeña etiqueta de versión en pantalla */
+/* 🏷️ Versión visible en pantalla */
 window.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("div");
   tag.textContent = CONFIG.APP_VERSION;

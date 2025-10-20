@@ -1,5 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allston Car Wash – Red Glass LIVE</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-  <!-- 🔴 Splash -->
+
+  <!-- 🚀 Splash -->
   <div id="splash">
     <div class="logo-glow">ACW</div>
     <p>Allston Car Wash<br><span>Red Glass LIVE</span></p>
@@ -8,8 +18,8 @@
   <!-- 🔐 Login -->
   <div id="login" class="container">
     <h2>ALLSTON CAR WASH</h2>
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+    <input id="email" type="email" placeholder="Email" autocomplete="email">
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password">
     <button onclick="loginUser()">Sign In</button>
   </div>
 
@@ -21,7 +31,7 @@
     <button id="teamOverviewBtn" style="display:none;" onclick="openTeamOverview()">Team Overview</button>
   </div>
 
-  <!-- 👥 Team -->
+  <!-- 👥 Team Modal -->
   <div id="teamModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeTeamOverview()">×</span>
@@ -30,19 +40,19 @@
     </div>
   </div>
 
-  <!-- 👤 Employee -->
+  <!-- 👤 Employee Modal -->
   <div id="employeeModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeEmployeeModal()">×</span>
       <h2 id="empName"></h2>
       <p id="empPhone"></p>
       <div id="empTable"></div>
-      <textarea id="empMessage" placeholder="Type a message…"></textarea>
+      <textarea id="empMessage" placeholder="Type your message…"></textarea>
       <button onclick="sendEmpMessage()">Send Message</button>
     </div>
   </div>
 
-  <!-- ⚙️ Settings -->
+  <!-- ⚙️ Settings Modal -->
   <div id="settingsModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeSettings()">×</span>
@@ -51,9 +61,15 @@
     </div>
   </div>
 
+  <!-- ⚙️ Gear -->
   <button class="gear-btn" onclick="openSettings()">⚙️</button>
-  <div class="hud bottom-center">Powered by JAG15 | Allston Car Wash © 2025</div>
+
+  <!-- 👣 Footer -->
+  <div class="hud bottom-center">
+    Powered by <b>JAG15</b> | Allston Car Wash © 2025
+  </div>
 
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
+</html>
